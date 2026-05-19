@@ -13,7 +13,7 @@ class clsBankClient :public clsPerson
 {
 private:
 
-    enum enMode { EmptyMode = 0, UpdateMode = 1 };
+    enum enMode { EmptyMode = 0, UpdateMode = 1, AddNew = 2 };
     enMode _Mode;
     string _AccountNumber;
     string _PinCode;
@@ -40,7 +40,6 @@ private:
         // serialized as a single line with proper field delimiting.
         LineInfo = ClientInfo.FirstName + Seperator
             + ClientInfo.LastName + Seperator
-            + ClientInfo.FullName() + Seperator
             + ClientInfo.Phone + Seperator
             + ClientInfo.Email + Seperator
             + ClientInfo.GetAccountNumber() + Seperator
@@ -54,11 +53,14 @@ private:
         {
             if (Client.GetAccountNumber() == AccountNumber)
             {
-                return GetUpdatedInfoFromUser(Client);
+                return GetInfoFromUser(Client);
 
             }
         }
         return _GetEmptyClientObject();
+    }
+  static  clsBankClient _GetAddNewClient(string AccountNumber) {
+        return clsBankClient(enMode::AddNew, "", "", "", "", AccountNumber, "", 0);
     }
 
 public:
@@ -197,7 +199,7 @@ public:
 
         return vFileData;
     }
-    static clsBankClient GetUpdatedInfoFromUser(clsBankClient Client)
+    static clsBankClient GetInfoFromUser(clsBankClient Client)
     {
 
         cout << "Please enter First Name: ";
@@ -212,7 +214,7 @@ public:
         cout << "Please enter Email: ";
         Client.Email = clsInputValidate::ReadString();
 
-        cout << "Please enter Pin Code: ";
+        cout << "Please enter Password: ";
         Client.PinCode = clsInputValidate::ReadString();
 
         cout << "Please enter Balance: ";
@@ -221,6 +223,21 @@ public:
         return Client;
     }
 
+    static void AddNewClientToFill(clsBankClient Client)
+    {
+        fstream MyFile;
+        MyFile.open("Clients.txt", ios::app);
+
+        if (MyFile.is_open())
+        {
+            
+            MyFile << _ConvertObjectToLine(Client) << endl;
+
+            MyFile.close();
+        }
+        else
+            cout << "The file can't open!\n";
+    }
     static void UploadDataToFile(vector <clsBankClient>& vFileData)
     {
         fstream MyFile;
@@ -231,7 +248,7 @@ public:
             string Line;
             for (clsBankClient& ClientInfo : vFileData)
             {
-                MyFile << _ConvertObjectToLine(ClientInfo);
+                MyFile << _ConvertObjectToLine(ClientInfo) << endl;
             }
             MyFile.close();
         }
@@ -247,7 +264,7 @@ public:
         cout << "Please Enter The Account Number?\n";
         AccountNumber = clsInputValidate::ReadString();
 
-        while (IsClientExist(AccountNumber))
+        while (!IsClientExist(AccountNumber))
         {
             cout << "The Client Is NOT Exist! Please try again?\n";
             AccountNumber = clsInputValidate::ReadString();
@@ -263,5 +280,30 @@ public:
 
         return ClientAfterUpdated;
     }
+    string GetAccountNumber()
+    {
+        cout << "Please enter the Account Number?\n";
+        return clsInputValidate::ReadString();
+    }
     
+    static void AddNewClient()
+    {
+       // vector <clsBankClient> vFileData;
+        string AccountNumber;
+        cout << "Please enter the AccountNumber?\n";
+        AccountNumber = clsInputValidate::ReadString();
+
+        while (IsClientExist(AccountNumber))
+        {
+            cout << "The Client Is Exist! Please enter another PinCode?\n";
+            AccountNumber = clsInputValidate::ReadString();
+        }
+       // GetDataFromFileToVector(vFileData);
+        clsBankClient NewClient = _GetAddNewClient(AccountNumber);
+        AddNewClientToFill(NewClient);
+        
+
+        
+        
+    }
 };
