@@ -6,18 +6,21 @@
 #include "clsInputValidate.h"
 #include <fstream>
 #include <vector>
+#include <iomanip>
+
 
 using namespace std;
 
-class clsBankClient :public clsPerson
+class clsBankClient : public clsPerson
 {
 private:
 
-    enum enMode { EmptyMode = 0, UpdateMode = 1, AddNew = 2 };
+    enum enMode { EmptyMode = 0, UpdateMode = 1, AddNew = 2, Delete = 3};
     enMode _Mode;
     string _AccountNumber;
     string _PinCode;
     float _AccountBalance;
+    bool _MarkForDelete = false;
 
     static clsBankClient _ConvertLinetoClientObject(string Line, string Seperator = "#//#")
     {
@@ -28,16 +31,10 @@ private:
             vClientData[3], vClientData[4], vClientData[5], stod(vClientData[6]));
 
     }
-
-    static clsBankClient _GetEmptyClientObject()
-    {
-        return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
-    }
     static string _ConvertObjectToLine(clsBankClient ClientInfo, string Seperator = "#//#")
     {
         string LineInfo;
-        // Ensure we include the separator between every field so each client is
-        // serialized as a single line with proper field delimiting.
+       
         LineInfo = ClientInfo.FirstName + Seperator
             + ClientInfo.LastName + Seperator
             + ClientInfo.Phone + Seperator
@@ -47,21 +44,24 @@ private:
             + to_string(ClientInfo._AccountBalance);
         return LineInfo;
     }
-    static clsBankClient _UpdateClientDataInVector(vector <clsBankClient>& vFileData, string AccountNumber)
-    {
-        for (clsBankClient& Client : vFileData)
-        {
-            if (Client.GetAccountNumber() == AccountNumber)
-            {
-                return GetInfoFromUser(Client);
 
-            }
+
+
+    void _MarkAccountToDelete(vector <clsBankClient>& vClientInfo, string AccountNum)
+    {
+        for (clsBankClient& Client : vClientInfo)
+        {
+            if (Client.GetAccountNumber() == AccountNum)
+                Client._MarkForDelete = true;
         }
-        return _GetEmptyClientObject();
     }
-  static  clsBankClient _GetAddNewClient(string AccountNumber) {
-        return clsBankClient(enMode::AddNew, "", "", "", "", AccountNumber, "", 0);
+
+
+    static clsBankClient _GetEmptyClientObject()
+    {
+        return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
+
 
 public:
     clsBankClient(enMode Mode, string FirstName, string LastName,
@@ -109,28 +109,28 @@ public:
         return (_Mode == enMode::EmptyMode);
     }
 
+    static clsBankClient UpdateClientDataInVector(vector <clsBankClient>& vFileData, string AccountNumber)
+    {
+        for (clsBankClient& Client : vFileData)
+        {
+            if (Client.GetAccountNumber() == AccountNumber)
+            {
+                GetInfoFromUser(Client);
+                return Client;
+            }
+        }
+        return _GetEmptyClientObject();
+    }
+
     static bool IsClientExist(string AccountNumber)
     {
-
         clsBankClient Client1 = clsBankClient::Find(AccountNumber);
 
         return (!Client1.IsEmpty());
     }
 
-    void Print()
-    {
-        cout << "\nClient Card:";
-        cout << "\n___________________";
-        cout << "\nFirstName   : " << FirstName;
-        cout << "\nLastName    : " << LastName;
-        cout << "\nFull Name   : " << FullName();
-        cout << "\nEmail       : " << Email;
-        cout << "\nPhone       : " << Phone;
-        cout << "\nAcc. Number : " << _AccountNumber;
-        cout << "\nPassword    : " << _PinCode;
-        cout << "\nBalance     : " << _AccountBalance;
-        cout << "\n___________________\n";
-
+    static  clsBankClient GetAddNewClient(string AccountNumber) {
+        return clsBankClient(enMode::AddNew, "", "", "", "", AccountNumber, "", 0);
     }
 
     static clsBankClient Find(string AccountNumber)
@@ -180,8 +180,11 @@ public:
         }
         return _GetEmptyClientObject();
     }
-    static vector <clsBankClient> GetDataFromFileToVector(vector <clsBankClient>& vFileData)
+
+    static vector <clsBankClient> GetDataFromFileToVector()
     {
+        vector <clsBankClient> vFileData;
+
         fstream MyFile;
         MyFile.open("Clients.txt", ios::in);//read Mode
 
@@ -190,6 +193,7 @@ public:
             string Line;
             while (getline(MyFile, Line))
             {
+                if(!Line.empty())
                 vFileData.push_back(_ConvertLinetoClientObject(Line));
             }
             MyFile.close();
@@ -199,7 +203,8 @@ public:
 
         return vFileData;
     }
-    static clsBankClient GetInfoFromUser(clsBankClient Client)
+
+    static void GetInfoFromUser(clsBankClient& Client)
     {
 
         cout << "Please enter First Name: ";
@@ -214,13 +219,12 @@ public:
         cout << "Please enter Email: ";
         Client.Email = clsInputValidate::ReadString();
 
-        cout << "Please enter Password: ";
+        cout << "Please enter Pin Code: ";
         Client.PinCode = clsInputValidate::ReadString();
 
         cout << "Please enter Balance: ";
-        Client.AccountBalance = clsInputValidate::ReadDblNumber();
+        Client.AccountBalance = clsInputValidate::ReadFloatNumber();
 
-        return Client;
     }
 
     static void AddNewClientToFill(clsBankClient Client)
@@ -230,14 +234,13 @@ public:
 
         if (MyFile.is_open())
         {
-            
             MyFile << _ConvertObjectToLine(Client) << endl;
-
             MyFile.close();
         }
         else
             cout << "The file can't open!\n";
     }
+
     static void UploadDataToFile(vector <clsBankClient>& vFileData)
     {
         fstream MyFile;
@@ -248,7 +251,10 @@ public:
             string Line;
             for (clsBankClient& ClientInfo : vFileData)
             {
-                MyFile << _ConvertObjectToLine(ClientInfo) << endl;
+                if(ClientInfo._MarkForDelete == false)
+                {
+                    MyFile << _ConvertObjectToLine(ClientInfo) << endl;
+                }
             }
             MyFile.close();
         }
@@ -256,54 +262,64 @@ public:
             cout << "The file can't open!\n";
     }
 
-    static	clsBankClient UpdateClientData()
-    {
-        string AccountNumber;
-        vector <clsBankClient> vFileData;
-        
-        cout << "Please Enter The Account Number?\n";
-        AccountNumber = clsInputValidate::ReadString();
-
-        while (!IsClientExist(AccountNumber))
-        {
-            cout << "The Client Is NOT Exist! Please try again?\n";
-            AccountNumber = clsInputValidate::ReadString();
-        }
-        
-        clsBankClient Client = Find(AccountNumber);
-        Client.Print();
-
-        GetDataFromFileToVector(vFileData);
-        clsBankClient ClientAfterUpdated = _UpdateClientDataInVector(vFileData, AccountNumber);
-         UploadDataToFile(vFileData);
-         ClientAfterUpdated.Print();
-
-        return ClientAfterUpdated;
-    }
-    string GetAccountNumber()
-    {
-        cout << "Please enter the Account Number?\n";
-        return clsInputValidate::ReadString();
-    }
     
-    static void AddNewClient()
+    static  void DeleteClientFromFile(string AccountNumber)
     {
-       // vector <clsBankClient> vFileData;
-        string AccountNumber;
-        cout << "Please enter the AccountNumber?\n";
-        AccountNumber = clsInputValidate::ReadString();
+        vector <clsBankClient> vFileData = GetDataFromFileToVector();
 
-        while (IsClientExist(AccountNumber))
+        for (clsBankClient& Client : vFileData)
         {
-            cout << "The Client Is Exist! Please enter another PinCode?\n";
-            AccountNumber = clsInputValidate::ReadString();
+            if (Client.GetAccountNumber() == AccountNumber)
+            {
+                Client._MarkForDelete = true;
+                UploadDataToFile(vFileData);
+                Client = _GetEmptyClientObject();
+                break;
+            }
         }
-       // GetDataFromFileToVector(vFileData);
-        clsBankClient NewClient = _GetAddNewClient(AccountNumber);
-        AddNewClientToFill(NewClient);
-        
 
-        
-        
     }
+
+
+  static void PrintBalanceInfoHeader(size_t ClientsNum)
+  {
+      cout << "\t\t\t\t\t\t Client List (" << ClientsNum << ") Client(s). \n\n";
+      cout << "____________________________________________________________________________________________________________________\n\n";
+      cout << setw(20) << left << "| Account Number";
+      cout << setw(40) << left << "| Client Name";
+      cout << setw(20) << left << "| Balance";
+      cout << "\n____________________________________________________________________________________________________________________\n\n";
+  }
+
+  static void PrintBalanceInfo(clsBankClient Client)
+  {
+      cout << "| " << setw(18) << Client.GetAccountNumber();
+      cout << "| " << setw(38) << Client.FullName();
+      cout << "| " << setw(18) << Client.GetAccountBalance();
+  }
+
+  static float CalculateTotalBalance(vector<clsBankClient>& vClientInfo)
+  {
+      float TotalBalance = 0.0;
+      for (clsBankClient& Client : vClientInfo)
+          TotalBalance += Client.GetAccountBalance();
+      return TotalBalance;
+  }
+
+  static void PrintClientBalanceList()
+  {
+      vector<clsBankClient> vFileData = GetDataFromFileToVector();
+
+      system("cls");
+      PrintBalanceInfoHeader(vFileData.size());
+
+      for (clsBankClient& Client : vFileData)
+      {
+          PrintBalanceInfo(Client);
+          cout << endl;
+      }
+      cout << "\n____________________________________________________________________________________________________________________\n\n\n";
+      cout << "\t\t\t\t Total Balance = " << CalculateTotalBalance(vFileData) << "\n\n";
+  }
+
 };

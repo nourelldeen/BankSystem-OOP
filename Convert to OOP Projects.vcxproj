@@ -136,9 +136,16 @@
     <ClInclude Include="..\ConsoleApplication12\clsBankClient.h" />
     <ClInclude Include="..\ConsoleApplication12\clsString.h" />
     <ClInclude Include="..\ConsoleApplication12\FirstLib.h" />
+    <ClInclude Include="clsAddNewClientScreen.h" />
     <ClInclude Include="clsDate.h" />
+    <ClInclude Include="clsFindClientScreen.h" />
     <ClInclude Include="clsInputValidate.h" />
+    <ClInclude Include="clsMainScreen.h" />
     <ClInclude Include="clsPerson.h" />
+    <ClInclude Include="clsScreen.h" />
+    <ClInclude Include="clsClientListScreen.h" />
+    <ClInclude Include="clsDeleteClientScreen.h" />
+    <ClInclude Include="clsUpdateClientData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
