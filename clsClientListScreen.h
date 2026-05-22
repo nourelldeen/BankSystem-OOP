@@ -8,7 +8,7 @@
 class clsClientListScreen :protected clsScreen
 {
 
-
+private:
     static void _PrintClientListHeader()
     {
         cout << "____________________________________________________________________________________________________________________\n\n";

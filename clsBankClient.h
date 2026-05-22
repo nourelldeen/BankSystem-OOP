@@ -45,6 +45,10 @@ private:
         return LineInfo;
     }
 
+    bool _IsEmpty()
+    {
+        return (_Mode == enMode::EmptyMode);
+    }
 
 
     void _MarkAccountToDelete(vector <clsBankClient>& vClientInfo, string AccountNum)
@@ -104,10 +108,6 @@ public:
     }
     __declspec(property(get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
 
-    bool IsEmpty()
-    {
-        return (_Mode == enMode::EmptyMode);
-    }
 
     static clsBankClient UpdateClientDataInVector(vector <clsBankClient>& vFileData, string AccountNumber)
     {
@@ -126,7 +126,7 @@ public:
     {
         clsBankClient Client1 = clsBankClient::Find(AccountNumber);
 
-        return (!Client1.IsEmpty());
+        return (!Client1._IsEmpty());
     }
 
     static  clsBankClient GetAddNewClient(string AccountNumber) {
