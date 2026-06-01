@@ -29,7 +29,7 @@ private:
           cout << "Please enter the AccountNumber?\n";
           AccountNumber = clsInputValidate::ReadString();
 
-          while (clsBankClient::IsClientExist(AccountNumber))
+          while (!clsBankClient::IsClientExist(AccountNumber))
           {
               cout << "The Client Is Already Exist! Please Choose another PinCode:";
               AccountNumber = clsInputValidate::ReadString();

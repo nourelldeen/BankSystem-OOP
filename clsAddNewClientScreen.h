@@ -15,7 +15,7 @@ private:
         cout << "\nEmail       : " << client.Email;
         cout << "\nPhone       : " << client.Phone;
         cout << "\nAcc. Number : " << client.GetAccountNumber();
-        cout << "\Pin Code     : " << client.GetPinCode();
+        cout << "\nPin Code    : " << client.GetPinCode();
         cout << "\nBalance     : " << client.GetAccountBalance();
         cout << "\n___________________\n";
 

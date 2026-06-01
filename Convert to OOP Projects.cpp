@@ -1,6 +1,4 @@
 #include <iostream>
-#include"clsBankClient.h"
-#include "clsPerson.h"
 #include "clsMainScreen.h"
 using namespace std;
 

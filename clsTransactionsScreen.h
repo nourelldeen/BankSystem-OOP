@@ -4,8 +4,9 @@
 #include "clsInputValidate.h"
 #include "clsBankClient.h"
 #include "clsScreen.h"
-#include "clsMainScreen.h"
 using namespace std;
+
+class clsMainScreen { public: static void ShowMainMenue(); };
 
 class clsTransactionsScreen : protected clsScreen
 {
@@ -44,7 +45,7 @@ class clsTransactionsScreen : protected clsScreen
 
 public:
     
-    static void ShowTransactionsMenu()
+    static void ShowTransactionsMenue()
     {
         _DrawScreenHeader("Transactions Screen");
        
