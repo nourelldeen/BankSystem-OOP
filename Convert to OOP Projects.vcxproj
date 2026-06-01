@@ -145,6 +145,7 @@
     <ClInclude Include="clsScreen.h" />
     <ClInclude Include="clsClientListScreen.h" />
     <ClInclude Include="clsDeleteClientScreen.h" />
+    <ClInclude Include="clsTransactionsScreen.h" />
     <ClInclude Include="clsUpdateClientData.h" />
     <ClInclude Include="clsUtil.h" />
   </ItemGroup>

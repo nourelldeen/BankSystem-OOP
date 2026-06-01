@@ -10,6 +10,7 @@
 #include "clsUtil.h"
 
 
+
 using namespace std;
 
 class clsBankClient : public clsPerson
@@ -176,25 +177,6 @@ private:
 
     }
    
-    bool _Delete()
-    {
-        vector <clsBankClient> vFileData = _GetDataFromFileToVector();
-
-        for (clsBankClient& Client : vFileData)
-        {
-            if (Client.GetAccountNumber() == _AccountNumber)
-            {
-                Client._IsDeleted = true;
-                break;
-            }
-        }
-        _UploadDataToFile(vFileData);
-
-        *this = _GetEmptyClientObject();
-
-        return true;
-    }
-
     static clsBankClient _GetEmptyClientObject()
         {
             return clsBankClient(enMode::enEmptyMode, "", "", "", "", "", "", 0);
@@ -346,53 +328,6 @@ public:
         return _GetEmptyClientObject();
     }
 
-  static void UpdateClientData()
-  {
-      string AccountNumber = "";
-
-      cout << "Please Enter The Account Number?\n";
-      AccountNumber = clsInputValidate::ReadString();
-
-      while (!clsBankClient::IsClientExist(AccountNumber))
-      {
-          cout << "The Client Is NOT Exist! Please try again?\n";
-          AccountNumber = clsInputValidate::ReadString();
-      }
-
-      clsBankClient Client = clsBankClient::Find(AccountNumber);
-      Client.Print();
-
-      char Sure = 'N';
-
-      cout << "\nAre you sure you want to update this account?  Y/N: ";
-      cin >> Sure;
-   
-          cout << "\n\nUpdate Client Info:";
-          cout << "\n____________________\n";
-          _GetInfoFromUser(Client);
-   
-          enSaveResults SaveResult;
-          SaveResult = Client.Save();
-
-          switch (SaveResult)
-          {
-          case  clsBankClient::enSaveResults::svSucceeded:
-          {
-              cout << "\nAccount Updated Successfully :-)\n";
-              Client.Print();
-              break;
-          }
-          case clsBankClient::enSaveResults::svFaildEmptyObject:
-          {
-              cout << "\nError account was not saved because it's Empty";
-              break;
-
-          }
-
-          }
-
-  }
-
   static void AddNewClient()
   {
 
@@ -436,37 +371,23 @@ public:
 
   }
 
-  static void DeleteClient()
+  bool Delete()
   {
-      string AccountNumber;
-      cout << "Please enter the AccountNumber?\n";
-      AccountNumber = clsInputValidate::ReadString();
+      vector <clsBankClient> vFileData = _GetDataFromFileToVector();
 
-      while (!clsBankClient::IsClientExist(AccountNumber))
+      for (clsBankClient& Client : vFileData)
       {
-          cout << "The Client Is NOT Exist! Please try again?\n";
-          AccountNumber = clsInputValidate::ReadString();
-      }
-      clsBankClient Client = clsBankClient::Find(AccountNumber);
-      Client.Print();
-
-      cout << "\nAre you sure you want to delete this account?  Y/N: ";
-      char Sure = 'N';
-      cin >> Sure;
-
-      if (toupper(Sure) == 'Y')
-      {
-          if (Client._Delete())
+          if (Client.GetAccountNumber() == _AccountNumber)
           {
-              cout << "\nClient Deleted Successfully :)\n";
-              Client.Print();
+              Client._IsDeleted = true;
+              break;
           }
-          else
-          {
-              cout << "\nError Client Was not Deleted\n";
-          }
-          
       }
+      _UploadDataToFile(vFileData);
+
+      *this = _GetEmptyClientObject();
+
+      return true;
   }
 
   static vector <clsBankClient> GetClientsList()

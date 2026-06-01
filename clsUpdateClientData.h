@@ -5,7 +5,7 @@
 class clsUpdateClientData : public clsScreen
 {
 private :
-    static void _Print(clsBankClient& client)
+    static void _PrintClient(clsBankClient& client)
     {
         cout << "\nClient Card:";
         cout << "\n___________________";
@@ -19,41 +19,86 @@ private :
         cout << "\nBalance     : " << client.GetAccountBalance();
         cout << "\n___________________\n";
     }
-public:
-    static	void UpdateClientData()
+    static void ReadClientInfo(clsBankClient& Client)
     {
-      //  _DrawScreenHeader("\tUpdate Client's Data Screen");
-        string AccountNumber;
-        vector <clsBankClient> vFileData = clsBankClient::GetDataFromFileToVector();
+        cout << "\nEnter FirstName: ";
+        Client.FirstName = clsInputValidate::ReadString();
 
-        cout << "Please Enter The Account Number?\n";
+        cout << "\nEnter LastName: ";
+        Client.LastName = clsInputValidate::ReadString();
+
+        cout << "\nEnter Email: ";
+        Client.Email = clsInputValidate::ReadString();
+
+        cout << "\nEnter Phone: ";
+        Client.Phone = clsInputValidate::ReadString();
+
+        cout << "\nEnter PinCode: ";
+        Client.PinCode = clsInputValidate::ReadString();
+
+        cout << "\nEnter Account Balance: ";
+        Client.AccountBalance = clsInputValidate::ReadFloatNumber();
+    }
+
+public:
+
+    static void ShowUpdateClientScreen()
+    {
+
+        _DrawScreenHeader("\tUpdate Client Screen");
+
+        string AccountNumber = "";
+
+        cout << "\nPlease Enter client Account Number: ";
         AccountNumber = clsInputValidate::ReadString();
 
         while (!clsBankClient::IsClientExist(AccountNumber))
         {
-            cout << "The Client Is NOT Exist! Please try again?\n";
+            cout << "\nAccount number is not found, choose another one: ";
             AccountNumber = clsInputValidate::ReadString();
         }
 
         clsBankClient Client = clsBankClient::Find(AccountNumber);
-        _Print(Client);
 
-        char Sure = 'N';
+        _PrintClient(Client);
 
-        cout << "\nAre you sure you want to update this account?  Y/N: ";
-        cin >> Sure;
+        cout << "\nAre you sure you want to update this client y/n? ";
 
-        if (toupper(Sure) == 'Y')
+        char Answer = 'n';
+        cin >> Answer;
+
+        if (Answer == 'y' || Answer == 'Y')
         {
-            clsBankClient UpdatedClient = clsBankClient::UpdateClientDataInVector(vFileData, AccountNumber);
-            clsBankClient::UploadDataToFile(vFileData);
-            _Print(UpdatedClient);
 
-            cout << "The Client updated successfully :) \n";
+            cout << "\n\nUpdate Client Info:";
+            cout << "\n____________________\n";
+
+
+            ReadClientInfo(Client);
+
+            clsBankClient::enSaveResults SaveResult;
+
+            SaveResult = Client.Save();
+
+            switch (SaveResult)
+            {
+            case  clsBankClient::enSaveResults::svSucceeded:
+            {
+                cout << "\nAccount Updated Successfully :-)\n";
+
+                _PrintClient(Client);
+                break;
+            }
+            case clsBankClient::enSaveResults::svFaildEmptyObject:
+            {
+                cout << "\nError account was not saved because it's Empty";
+                break;
+
+            }
+
+            }
+
         }
-        else
-            cout << "The Client wasn't updated \n";
+
     }
-
 };
-

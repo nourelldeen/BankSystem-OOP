@@ -8,7 +8,8 @@
 #include "clsAddNewClientScreen.h"
 #include "clsDeleteClientScreen.h"
 #include"clsUpdateClientData.h"
-
+#include "clsFindClientScreen.h"
+#include "clsTransactionsScreen.h"
 
 
 using namespace std;
@@ -33,11 +34,9 @@ private:
 
     static  void _GoBackToMainMenue()
     {
-       // cout << setw(37) << left << "" << "\n\tPress any key to go back to Main Menue...\n";
-        // I commented it cuas the system("pause>0") doesn't work now;
+        cout << setw(37) << left << "" << "\n\tPress any key to go back to Main Menue...\n";
 
-
-        system("pause");
+        system("pause0>");
         ShowMainMenue();
     }
 
@@ -58,19 +57,17 @@ private:
 
     static void _ShowUpdateClientScreen()
     {
-        clsUpdateClientData::UpdateClientData();
+        clsUpdateClientData::ShowUpdateClientScreen();
     }
 
     static void _ShowFindClientScreen()
     {
-        cout << "\nFind Client Screen Will be here...\n";
-
+        clsFindClientScreen::ShowFindClientScreen();
     }
 
     static void _ShowTransactionsMenue()
     {
-        cout << "\nTransactions Menue Will be here...\n";
-
+        clsTransactionsScreen::ShowTransactionsMenu();
     }
 
     static void _ShowManageUsersMenue()

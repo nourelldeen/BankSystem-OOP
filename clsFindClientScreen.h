@@ -2,56 +2,53 @@
 #include "clsBankClient.h"
 #include <iostream>
 #include "clsScreen.h"
-class clsFindClientScreen : public clsScreen
+class clsFindClientScreen : protected clsScreen
 {
 private:
-    
-    static clsBankClient Find(string AccountNumber)
+    static void _PrintClient(clsBankClient Client)
     {
-        fstream MyFile;
-        MyFile.open("Clients.txt", ios::in);//read Mode
-
-        if (MyFile.is_open())
-        {
-            string Line;
-            while (getline(MyFile, Line))
-            {
-                clsBankClient Client = _ConvertLinetoClientObject(Line);
-                if (Client.GetAccountNumber() == AccountNumber)
-                {
-                    MyFile.close();
-                    return Client;
-                }
-
-            }
-            MyFile.close();
-
-        }
-
-        return _GetEmptyClientObject();
+        cout << "\nClient Card:";
+        cout << "\n___________________";
+        cout << "\nFirstName   : " << Client.FirstName;
+        cout << "\nLastName    : " << Client.LastName;
+        cout << "\nFull Name   : " << Client.FullName();
+        cout << "\nEmail       : " << Client.Email;
+        cout << "\nPhone       : " << Client.Phone;
+        cout << "\nAcc. Number : " << Client.GetAccountNumber();
+        cout << "\nPin Code    : " << Client.GetPinCode();
+        cout << "\nBalance     : " << Client.GetAccountBalance();
+        cout << "\n___________________\n";
     }
 
-    static clsBankClient Find(string AccountNumber, string PinCode)
-    {
+  public:
+      static void ShowFindClientScreen()
+      {
+          _DrawScreenHeader("Find Client");
 
-        fstream MyFile;
-        MyFile.open("Clients.txt", ios::in);//read Mode
+          string AccountNumber;
+          cout << "Please enter the AccountNumber?\n";
+          AccountNumber = clsInputValidate::ReadString();
 
-        if (MyFile.is_open())
-        {
-            string Line;
-            while (getline(MyFile, Line))
-            {
-                clsBankClient Client = _ConvertLinetoClientObject(Line);
-                if (Client.GetAccountNumber() == AccountNumber && Client.PinCode == PinCode)
-                {
-                    MyFile.close();
-                    return Client;
-                }
-            }
-            MyFile.close();
-        }
-        return _GetEmptyClientObject();
-    }
+          while (clsBankClient::IsClientExist(AccountNumber))
+          {
+              cout << "The Client Is Already Exist! Please Choose another PinCode:";
+              AccountNumber = clsInputValidate::ReadString();
+          }
+
+          clsBankClient Client = clsBankClient::Find(AccountNumber);
+
+
+
+          if (!Client.IsEmpty())
+          {
+              cout << "\nClient Found :)\n";
+          }
+          else
+          {
+              cout << "\nClient Was Not Found :(\n";
+          }
+
+          _PrintClient(Client);
+      }
 };
 

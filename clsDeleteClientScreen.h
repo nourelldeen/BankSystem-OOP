@@ -25,30 +25,35 @@ public:
     {
         _DrawScreenHeader("\tDelete Screen");
 
-        string AccountNumber;
-        cout << "Please enter the AccountNumber?\n";
-        AccountNumber = clsInputValidate::ReadString();
-
-        while (!clsBankClient::IsClientExist(AccountNumber))
-        {
-            cout << "The Client Is NOT Exist! Please try again?\n";
+            string AccountNumber;
+            cout << "Please enter the AccountNumber?\n";
             AccountNumber = clsInputValidate::ReadString();
-        }
-        clsBankClient Client = clsBankClient::Find(AccountNumber);
-        Client.Print();
 
-        char Sure = 'N';
+            while (!clsBankClient::IsClientExist(AccountNumber))
+            {
+                cout << "The Client Is NOT Exist! Please try again?\n";
+                AccountNumber = clsInputValidate::ReadString();
+            }
+            clsBankClient Client = clsBankClient::Find(AccountNumber);
+            Client.Print();
 
-        cout << "\nAre you sure you want to delete this account?  Y/N: ";
-        cin >> Sure;
+            cout << "\nAre you sure you want to delete this account?  Y/N: ";
+            char Sure = 'N';
+            cin >> Sure;
 
-        if (toupper(Sure) == 'Y')
-        {
-            clsBankClient::DeleteClientFromFile(AccountNumber);
-            cout << "The Client Deleted successfully :) \n";
-        }
+            if (toupper(Sure) == 'Y')
+            {
+                if (Client.Delete())
+                {
+                    cout << "\nClient Deleted Successfully :)\n";
+                    _Print(Client);
+                }
+                else
+                {
+                    cout << "\nError Client Was not Deleted\n";
+                }
+
+            }
     }
-
-
 };
 

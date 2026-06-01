@@ -16,14 +16,14 @@
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{e4e88827-68d1-4c2b-b4f7-f5ca47552208}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Lib">
-      <UniqueIdentifier>{e340381c-2246-4b61-96e3-33645143fd92}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Screens">
       <UniqueIdentifier>{217fda20-1bc7-4773-8b02-aa7bd5aa2338}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Screens\Client">
       <UniqueIdentifier>{c6e4bf2b-5da1-40a4-9bf7-1169d635b023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{e340381c-2246-4b61-96e3-33645143fd92}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,27 +42,24 @@
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="clsDate.h">
-      <Filter>Header Files\Lib</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="clsInputValidate.h">
-      <Filter>Header Files\Lib</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="clsUtil.h">
-      <Filter>Header Files\Lib</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\ConsoleApplication12\clsString.h">
-      <Filter>Header Files\Lib</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="..\ConsoleApplication12\FirstLib.h">
-      <Filter>Header Files\Lib</Filter>
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="clsAddNewClientScreen.h">
       <Filter>Header Files\Screens\Client</Filter>
     </ClInclude>
     <ClInclude Include="clsClientListScreen.h">
-      <Filter>Header Files\Screens\Client</Filter>
-    </ClInclude>
-    <ClInclude Include="clsDeleteClientScreen.h">
       <Filter>Header Files\Screens\Client</Filter>
     </ClInclude>
     <ClInclude Include="clsScreen.h">
@@ -71,11 +68,17 @@
     <ClInclude Include="clsFindClientScreen.h">
       <Filter>Header Files\Screens\Client</Filter>
     </ClInclude>
+    <ClInclude Include="clsUpdateClientData.h">
+      <Filter>Header Files\Screens\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="clsDeleteClientScreen.h">
+      <Filter>Header Files\Screens\Client</Filter>
+    </ClInclude>
     <ClInclude Include="clsMainScreen.h">
       <Filter>Header Files\Screens\Client</Filter>
     </ClInclude>
-    <ClInclude Include="clsUpdateClientData.h">
-      <Filter>Header Files\Screens\Client</Filter>
+    <ClInclude Include="clsTransactionsScreen.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
