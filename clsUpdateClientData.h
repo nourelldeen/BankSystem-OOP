@@ -22,7 +22,7 @@ private :
 public:
     static	void UpdateClientData()
     {
-        _DrawScreenHeader("\tUpdate Client's Data Screen");
+      //  _DrawScreenHeader("\tUpdate Client's Data Screen");
         string AccountNumber;
         vector <clsBankClient> vFileData = clsBankClient::GetDataFromFileToVector();
 
@@ -52,7 +52,7 @@ public:
             cout << "The Client updated successfully :) \n";
         }
         else
-            cout << "The Client wasn't updateed \n";
+            cout << "The Client wasn't updated \n";
     }
 
 };

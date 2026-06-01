@@ -25,19 +25,8 @@ public:
     {
         _DrawScreenHeader("\tAdd New Client");
 
-        string AccountNumber;
-        cout << "Please enter the AccountNumber?\n";
-        AccountNumber = clsInputValidate::ReadString();
+        clsBankClient::AddNewClient();
 
-        while (clsBankClient::IsClientExist(AccountNumber))
-        {
-            cout << "The Client Is Exist! Please enter another PinCode?\n";
-            AccountNumber = clsInputValidate::ReadString();
-        }
-
-        clsBankClient NewClient = clsBankClient::GetAddNewClient(AccountNumber);
-        clsBankClient::GetInfoFromUser(NewClient);
-        clsBankClient::AddNewClientToFill(NewClient);
-                _Print(NewClient);    }
+    }
 };
 
