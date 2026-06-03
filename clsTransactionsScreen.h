@@ -4,9 +4,12 @@
 #include "clsInputValidate.h"
 #include "clsBankClient.h"
 #include "clsScreen.h"
+#include "clsDepositScreen.h"
+#include "clsWithdrawScreen.h"
+#include "clsTotalBalanceScreen.h"
+
 using namespace std;
 
-class clsMainScreen { public: static void ShowMainMenue(); };
 
 class clsTransactionsScreen : protected clsScreen
 {
@@ -14,31 +17,44 @@ class clsTransactionsScreen : protected clsScreen
     
     static short _ReadTransactionsMenuOption()
     {
-        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 8]? ";
-        short Choice = clsInputValidate::ReadIntNumberBetween(1, 8, "Enter Number between 1 to 8? ");
+        short Choice = clsInputValidate::ReadIntNumberBetween(1, 4);
         return Choice;
     }
+
+    static void _GoBackToTransactionsMenue()
+    {
+        cout << "\n\nPress any key to go back to Transactions Menue...";
+        system("pause>0");
+        ShowTransactionsMenue();
+
+    }
+
 
     static void _PerformTransactionsOption(enTransactionsOptions Options)
     {
         switch (Options)
         {
         case enTransactionsOptions::Deposit:
-            // _ShowDepositScreen();
+            system("cls");
+            clsDepositScreen::ShowDepositScreen();
+            _GoBackToTransactionsMenue();
             break;
           
         case enTransactionsOptions::Withdraw:
-            // _ShowWithdrawScreen();
+            system("cls");
+            clsWithdrawScreen::ShowWithdrawScreen();
+            _GoBackToTransactionsMenue();
             break;
 
 
         case enTransactionsOptions::TotalBalance:
             system("cls");
-            clsBankClient::PrintClientBalanceList();
+            clsTotalBalanceScreen::PrintClientBalanceList();
+            _GoBackToTransactionsMenue();
             break;
 
         case enTransactionsOptions::MainMenu:
-            clsMainScreen::ShowMainMenue();
+            //I will return to the Main Menu automatically 
             break;
         }
     }
@@ -47,10 +63,11 @@ public:
     
     static void ShowTransactionsMenue()
     {
-        _DrawScreenHeader("Transactions Screen");
+        system("cls");
+        _DrawScreenHeader("\tTransactions Screen");
        
         cout << setw(37) << left << "" << "===========================================\n";
-        cout << setw(37) << left << "" << "\t\t\tTransactions Menu\n";
+        cout << setw(37) << left << "" << "\t\t Transactions Menu\n";
         cout << setw(37) << left << "" << "===========================================\n";
         cout << setw(37) << left << "" << "\t[1] Deposit.\n";
         cout << setw(37) << left << "" << "\t[2] Withdraw.\n";
@@ -64,4 +81,3 @@ public:
     }
 
 };
-

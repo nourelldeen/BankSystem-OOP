@@ -394,51 +394,6 @@ public:
   {
       return _GetDataFromFileToVector();
   }
-
-  static void PrintBalanceInfoHeader(size_t ClientsNum)
-  {
-      cout << "\t\t\t\t\t\t Client List (" << ClientsNum << ") Client(s). \n\n";
-      cout << "____________________________________________________________________________________________________________________\n\n";
-      cout << setw(20) << left << "| Account Number";
-      cout << setw(40) << left << "| Client Name";
-      cout << setw(20) << left << "| Balance";
-      cout << "\n____________________________________________________________________________________________________________________\n\n";
-  }
-
-  static void PrintBalanceInfo(clsBankClient Client)
-  {
-      cout << "| " << setw(18) << Client.GetAccountNumber();
-      cout << "| " << setw(38) << Client.FullName();
-      cout << "| " << setw(18) << Client.GetAccountBalance();
-  }
-
-  static float CalculateTotalBalance(vector<clsBankClient>& vClientInfo)
-  {
-      float TotalBalance = 0.0;
-      for (clsBankClient& Client : vClientInfo)
-          TotalBalance += Client.GetAccountBalance();
-      return TotalBalance;
-  }
-
-  static void PrintClientBalanceList()
-  {
-      vector<clsBankClient> vFileData = _GetDataFromFileToVector();
-
-      system("cls");
-      PrintBalanceInfoHeader(vFileData.size());
-
-      for (clsBankClient& Client : vFileData)
-      {
-          PrintBalanceInfo(Client);
-          cout << endl;
-      }
-      float TotalBalances = CalculateTotalBalance(vFileData);
-      cout << "\n____________________________________________________________________________________________________________________\n\n\n";
-      cout << "\t\t\t\t Total Balance = " << TotalBalances << "\n\n";
-      cout << "\t\t\t\t\t   ( " << clsUtil::NumberToText(TotalBalances) << ")";
-
-  }
-
    void Print()
   {
       cout << "\nClient Card:";
@@ -453,5 +408,8 @@ public:
       cout << "\nBalance     : " << GetAccountBalance();
       cout << "\n___________________\n";
   }
-
+   static vector<clsBankClient> GetFileData()
+   {
+       return _GetDataFromFileToVector();
+   }
 };

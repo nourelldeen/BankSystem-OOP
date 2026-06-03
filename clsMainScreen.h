@@ -43,31 +43,37 @@ private:
     static void _ShowAllClientsScreen()
     {
         clsClientListScreen::ShowClientList();
+        _GoBackToMainMenue();
     }
 
     static void _ShowAddNewClientsScreen()
     {
         clsAddNewClientScreen::AddNewClient();
+        _GoBackToMainMenue();
     }
 
     static void _ShowDeleteClientScreen()
     {
         clsDeleteClientScreen::DeleteClient();
+        _GoBackToMainMenue();
     }
 
     static void _ShowUpdateClientScreen()
     {
         clsUpdateClientData::ShowUpdateClientScreen();
+        _GoBackToMainMenue();
     }
 
     static void _ShowFindClientScreen()
     {
         clsFindClientScreen::ShowFindClientScreen();
+        _GoBackToMainMenue();
     }
 
     static void _ShowTransactionsMenue()
     {
         clsTransactionsScreen::ShowTransactionsMenue();
+        _GoBackToMainMenue();
     }
 
     static void _ShowManageUsersMenue()
