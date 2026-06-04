@@ -408,8 +408,4 @@ public:
       cout << "\nBalance     : " << GetAccountBalance();
       cout << "\n___________________\n";
   }
-   static vector<clsBankClient> GetFileData()
-   {
-       return _GetDataFromFileToVector();
-   }
 };

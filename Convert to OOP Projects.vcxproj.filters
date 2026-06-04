@@ -31,6 +31,9 @@
     <Filter Include="Header Files\Screens\Client\MainMenu">
       <UniqueIdentifier>{20af76f0-a7be-49b6-a4a9-76502459cae0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Screens\Users">
+      <UniqueIdentifier>{1e9416a5-2f1e-4e7e-8b17-d84fcec3633b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Convert to OOP Projects.cpp">
@@ -92,11 +95,35 @@
     <ClInclude Include="clsScreen.h">
       <Filter>Header Files\Screens\Client\MainMenu</Filter>
     </ClInclude>
-    <ClInclude Include="clsUpdateClientData.h">
+    <ClInclude Include="clsUpdateClientScreen.h">
       <Filter>Header Files\Screens\Client\MainMenu</Filter>
     </ClInclude>
     <ClInclude Include="clsTotalBalanceScreen.h">
       <Filter>Header Files\Screens\Client\TransactionsMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="clsManageUsersScreen.h">
+      <Filter>Header Files\Screens\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="clsListUsersScreen.h">
+      <Filter>Header Files\Screens\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="clsDeleteUserScreen.h">
+      <Filter>Header Files\Screens\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="clsUpdateUserScreen.h">
+      <Filter>Header Files\Screens\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="clsAddNewUserScreen.h">
+      <Filter>Header Files\Screens\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="clsFindUserScreen.h">
+      <Filter>Header Files\Screens\Users</Filter>
+    </ClInclude>
+    <ClInclude Include="clsLoginScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,16 +1,16 @@
 #pragma once
 #include <iostream>
-#include <iomanip>
 #include "clsScreen.h"
-#include "clsBankClient.h"
 #include "clsInputValidate.h"
 #include "clsClientListScreen.h"
 #include "clsAddNewClientScreen.h"
 #include "clsDeleteClientScreen.h"
-#include"clsUpdateClientData.h"
+#include "clsUpdateClientScreen.h"
 #include "clsFindClientScreen.h"
 #include "clsTransactionsScreen.h"
-
+#include "clsManageUsersScreen.h"
+#include "clsLoginScreen.h"
+#include "Global.h"
 
 using namespace std;
 
@@ -28,7 +28,7 @@ private:
     static short _ReadMainMenueOption()
     {
         cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 8]? ";
-        short Choice = clsInputValidate::ReadIntNumberBetween(1, 8, "Enter Number between 1 to 8? ");
+        short Choice = clsInputValidate::ReadShortNumberBetween(1, 8, "Enter Number between 1 to 8? ");
         return Choice;
     }
 
@@ -42,51 +42,68 @@ private:
 
     static void _ShowAllClientsScreen()
     {
+        //  cout << "\nClient List Screen Will be here...\n";
         clsClientListScreen::ShowClientList();
-        _GoBackToMainMenue();
+
+
     }
 
     static void _ShowAddNewClientsScreen()
     {
-        clsAddNewClientScreen::AddNewClient();
-        _GoBackToMainMenue();
+        // cout << "\nAdd New Client Screen Will be here...\n";
+        clsAddNewClientScreen::ShowAddNewScreen();
+
     }
 
     static void _ShowDeleteClientScreen()
     {
-        clsDeleteClientScreen::DeleteClient();
-        _GoBackToMainMenue();
+        //cout << "\nDelete Client Screen Will be here...\n";
+        clsDeleteClientScreen::ShowDeleteClientScreen();
+
     }
 
     static void _ShowUpdateClientScreen()
     {
-        clsUpdateClientData::ShowUpdateClientScreen();
-        _GoBackToMainMenue();
+        //cout << "\nUpdate Client Screen Will be here...\n";
+        clsUpdateClientScreen::ShowUpdateClientScreen();
+
+
     }
 
     static void _ShowFindClientScreen()
     {
+        // cout << "\nFind Client Screen Will be here...\n";
         clsFindClientScreen::ShowFindClientScreen();
-        _GoBackToMainMenue();
+
+
     }
 
     static void _ShowTransactionsMenue()
     {
+        // cout << "\nTransactions Menue Will be here...\n";
         clsTransactionsScreen::ShowTransactionsMenue();
-        _GoBackToMainMenue();
+
     }
 
     static void _ShowManageUsersMenue()
     {
-        cout << "\nUsers Menue Will be here...\n";
-
+        // cout << "\nUsers Menue Will be here...\n";
+        clsManageUsersScreen::ShowManageUsersMenue();
     }
 
-    static void _ShowEndScreen()
+    /*  static void _ShowEndScreen()
+      {
+          cout << "\nEnd Screen Will be here...\n";
+
+      }*/
+
+    static void _Logout()
     {
-        cout << "\nEnd Screen Will be here...\n";
 
+        CurrentUser = clsUser::Find("", "");
+        //then it will go back to main function.
     }
+
 
     static void _PerfromMainMenueOption(enMainMenueOptions MainMenueOption)
     {
@@ -126,18 +143,19 @@ private:
         case enMainMenueOptions::eShowTransactionsMenue:
             system("cls");
             _ShowTransactionsMenue();
+            _GoBackToMainMenue();
             break;
 
         case enMainMenueOptions::eManageUsers:
             system("cls");
             _ShowManageUsersMenue();
+            _GoBackToMainMenue();
             break;
 
         case enMainMenueOptions::eExit:
             system("cls");
-            _ShowEndScreen();
-            //Login();
-
+            _Logout();
+            clsLoginScreen::ShowLoginScreen();
             break;
         }
 
@@ -171,4 +189,3 @@ public:
     }
 
 };
-

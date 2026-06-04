@@ -2,7 +2,7 @@
 #include <iostream>
 #include "clsBankClient.h"
 #include "clsScreen.h"
-class clsUpdateClientData : public clsScreen
+class clsUpdateClientScreen : public clsScreen
 {
 private :
     static void _PrintClient(clsBankClient& client)

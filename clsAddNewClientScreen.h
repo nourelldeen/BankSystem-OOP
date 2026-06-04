@@ -21,7 +21,7 @@ private:
 
     }
 public:
-    static void AddNewClient()
+    static void ShowAddNewScreen()
     {
         _DrawScreenHeader("\tAdd New Client");
 
