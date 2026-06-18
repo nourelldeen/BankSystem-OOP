@@ -29,7 +29,6 @@ public:
 
     static void ShowFindUserScreen()
     {
-
         _DrawScreenHeader("\t  Find User Screen");
 
         string UserName;

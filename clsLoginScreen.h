@@ -16,9 +16,12 @@ private:
 		cin >> Password;
 
 	}
-	static void _Login()
+
+
+	static bool _Login()
 	{
 		bool LoginFaild = false;
+		short NumOfTries = 0;
 
 		string Username, Password;
 		do
@@ -26,7 +29,15 @@ private:
 
 			if (LoginFaild)
 			{
-				cout << "\nInvlaid Username/Password!\n\n";
+				NumOfTries++;
+				cout << "\nInvalid Username/Password!\n\n";
+				cout << "You have " << (3 - NumOfTries);
+				cout << " trail(s) to Login.\n";
+			}
+			if (NumOfTries == 3)
+			{
+				cout << "You are Locked after 3 failed trails.\n\n";
+				return false;
 			}
 
 			_GetUserNameAndPassword(Username, Password);
@@ -34,19 +45,22 @@ private:
 			CurrentUser = clsUser::Find(Username, Password);
 
 			LoginFaild = CurrentUser.IsEmpty();
-
+		
 		} while (LoginFaild);
 
+		CurrentUser.RegisterLogIn();
+
 		clsMainScreen::ShowMainMenue();
+		return true;
 	}
 
 public:
-	static void ShowLoginScreen()
+	static bool ShowLoginScreen()
 	{
 		system("cls");
 		_DrawScreenHeader("\t\t Login");
 
-		_Login();
+		return _Login();
 	}
 };
 

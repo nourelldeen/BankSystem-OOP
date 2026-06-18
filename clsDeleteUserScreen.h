@@ -28,7 +28,7 @@ private:
 public:
     static void ShowDeleteUserScreen()
     {
-
+        
         _DrawScreenHeader("\tDelete User Screen");
 
         string UserName = "";

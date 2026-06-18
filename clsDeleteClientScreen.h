@@ -23,6 +23,11 @@ private:
 public:
     static void ShowDeleteClientScreen()
     {
+        if (!CheckAccessRights(clsUser::enPermissions::pDeleteClient))
+        {
+            return;// this will exit the function and it will not continue
+        }
+
         _DrawScreenHeader("\tDelete Screen");
 
             string AccountNumber;
