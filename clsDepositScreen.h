@@ -7,20 +7,22 @@ class clsDepositScreen : public clsScreen
 {
 private:
 
-	static void _AddDeposit(clsBankClient& Client)
+	static bool _AddDeposit(clsBankClient& Client)
 	{
-		float deposit = 0.0;
 		cout << "Please Enter Deposit Amount? ";
-		cin >> deposit;
+		float deposit = clsInputValidate::ReadFloatNumber();
 
 		char sure = 'Y';
 		cout << "Are you sure you want to add this deposit? Y/N  ";
 		cin >> sure;
 
-		if (toupper(sure) == 'Y')
+		if (toupper(sure) != 'Y')
 		{
-			Client.AccountBalance += deposit;
+			return false;
 		}
+
+		Client.Deposit(deposit);
+		return true;
 	}
 
 	static void _Print(clsBankClient& client)
@@ -56,13 +58,15 @@ public:
 		clsBankClient Client = clsBankClient::Find(AccountNumber);
 		_Print(Client);
 
-		_AddDeposit(Client);
-		Client.Save();
-
-		_Print(Client);
-
-		cout << "\nThe Process Done Successfully ;)\n";
+		if (_AddDeposit(Client))
+		{
+			_Print(Client);
+			cout << "\nThe Process Done Successfully ;)\n";
+		}
+		else
+		{
+			cout << "\nDeposit Cancelled.\n";
+		}
 	}
 
 };
-

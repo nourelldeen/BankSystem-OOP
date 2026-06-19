@@ -42,9 +42,6 @@
     <ClCompile Include="Convert to OOP Projects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="The Old Project.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clsBankClient.h">
@@ -63,9 +60,6 @@
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="clsString.h">
-      <Filter>Header Files\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="FirstLib.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="clsTransactionsScreen.h">

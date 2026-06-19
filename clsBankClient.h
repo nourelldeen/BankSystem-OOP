@@ -438,6 +438,7 @@ public:
        {
            _AccountBalance -= Amount;
            Save();
+           return true;
        }
 
    }
@@ -459,7 +460,7 @@ public:
        vector <stTrnsferLogRecord> vTransferLogRecord;
 
        fstream MyFile;
-       MyFile.open("TransfersLog.txt", ios::in);//read Mode
+       MyFile.open("TransferLog.txt", ios::in);//read Mode
 
        if (MyFile.is_open())
        {

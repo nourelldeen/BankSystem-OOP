@@ -6,26 +6,27 @@
 class clsWithdrawScreen : public clsScreen
 {
 private:
-	static void _AddWithdraw(clsBankClient& Client)
+	static bool _AddWithdraw(clsBankClient& Client)
 	{
-		float withdraw = 0.0;
-		cout << "Please Enter Deposit Amount? ";
-		cin >> withdraw;
-		// I will check if the logic of the condetion is right or not.
-		while (withdraw >= Client.AccountBalance)
-		{
-			cout << "You don't have enough amount, Please try again:  ";
-			cin >> withdraw;
-		}
+		cout << "Please Enter Withdraw Amount? ";
+		float withdraw = clsInputValidate::ReadFloatNumber();
 
 		char sure = 'Y';
-		cout << "Are you sure you want to add this deposit? Y/N  ";
+		cout << "Are you sure you want to make this withdraw? Y/N  ";
 		cin >> sure;
 
-		if (toupper(sure) == 'Y')
+		if (toupper(sure) != 'Y')
 		{
-			Client.AccountBalance -= withdraw;
+			return false;
 		}
+
+		if (!Client.Withdraw(withdraw))
+		{
+			cout << "\nWithdraw Failed: Amount Exceeds the Available Balance.\n";
+			return false;
+		}
+
+		return true;
 	}
 
 	static void _Print(clsBankClient& client)
@@ -47,7 +48,7 @@ private:
 public:
 	static void ShowWithdrawScreen()
 	{
-		_DrawScreenHeader("\t   Deposit");
+		_DrawScreenHeader("\t   Withdraw");
 
 		string AccountNumber;
 		cout << "Please enter the AccountNumber?\n";
@@ -61,13 +62,11 @@ public:
 		clsBankClient Client = clsBankClient::Find(AccountNumber);
 		_Print(Client);
 
-		_AddWithdraw(Client);
-		Client.Save();
-
-		_Print(Client);
-
-		cout << "\nThe Process Done Successfully ;)\n";
+		if (_AddWithdraw(Client))
+		{
+			_Print(Client);
+			cout << "\nThe Process Done Successfully ;)\n";
+		}
 	}
 
 };
-

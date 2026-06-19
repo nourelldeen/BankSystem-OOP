@@ -128,9 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Convert to OOP Projects.cpp" />
-    <ClCompile Include="The Old Project.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clsBankClient.h" />
@@ -141,7 +138,6 @@
     <ClInclude Include="clsFindCurrencyScreen.h" />
     <ClInclude Include="clsString.h" />
     <ClInclude Include="clsUpdateCurrencyRateScreen.h" />
-    <ClInclude Include="FirstLib.h" />
     <ClInclude Include="clsAddNewClientScreen.h" />
     <ClInclude Include="clsAddNewUserScreen.h" />
     <ClInclude Include="clsDate.h" />
