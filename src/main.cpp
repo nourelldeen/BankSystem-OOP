@@ -1,4 +1,4 @@
-#include "clsLoginScreen.h"
+#include "../include/clsLoginScreen.h"
 int main()
 {
 	while(true)
