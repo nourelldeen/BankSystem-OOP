@@ -1,7 +1,30 @@
-﻿.vs/
-x64/
-Convert .1ac053cf/
+﻿# Build directories
+build/
+bin/
+CMakeFiles/
+cmake_install.cmake
+
+# Compiled binaries and object files
+*.o
+*.a
+*.lib
+*.exe
+*.dll
+*.so
+
+# IDE and editor files
+.vscode/
+.idea/
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
+*.sln
 *.aps
 *.rc
 
-*.user
+# OS files
+.DS_Store
+Thumbs.db
+
+# Data files (optional - remove if you want to track them)
+*.txt
