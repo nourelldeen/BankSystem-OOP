@@ -34,9 +34,9 @@ private:
         return AccountNumber;
     }
 
-    static float _ReadAmount(clsBankClient SourceClient)
+    static double _ReadAmount(clsBankClient SourceClient)
     {
-        float Amount;
+        double Amount;
 
         std::cout << "\nEnter Transfer Amount? ";
 
@@ -65,7 +65,7 @@ public:
 
         _PrintClient(DestinationClient);
 
-        float Amount = _ReadAmount(SourceClient);
+        double Amount = _ReadAmount(SourceClient);
 
 
         std::cout << "\nAre you sure you want to perform this operation? y/n? ";

@@ -9,7 +9,7 @@ private:
 	static bool _AddWithdraw(clsBankClient& Client)
 	{
 		std::cout << "Please Enter Withdraw Amount? ";
-		float withdraw = clsInputValidate::ReadFloatNumber();
+		double withdraw = clsInputValidate::ReadFloatNumber();
 
 		char sure = 'Y';
 		std::cout << "Are you sure you want to make this withdraw? Y/N  ";

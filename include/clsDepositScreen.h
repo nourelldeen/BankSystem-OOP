@@ -10,7 +10,7 @@ private:
 	static bool _AddDeposit(clsBankClient& Client)
 	{
 		std::cout << "Please Enter Deposit Amount? ";
-		float deposit = clsInputValidate::ReadFloatNumber();
+		double deposit = clsInputValidate::ReadFloatNumber();
 
 		char sure = 'Y';
 		std::cout << "Are you sure you want to add this deposit? Y/N  ";

@@ -24,9 +24,9 @@ class clsTotalBalanceScreen : public clsScreen
         std::cout << "| " << std::setw(18) << Client.GetAccountBalance();
     }
 
-    static float _CalculateTotalBalance(std::vector<clsBankClient>& vClientInfo)
+    static double _CalculateTotalBalance(std::vector<clsBankClient>& vClientInfo)
     {
-        float TotalBalance = 0.0;
+        double TotalBalance = 0.0;
         for (clsBankClient& Client : vClientInfo)
             TotalBalance += Client.GetAccountBalance();
         return TotalBalance;
@@ -46,7 +46,7 @@ public:
             _PrintBalanceInfo(Client);
             std::cout << std::endl;
         }
-        float TotalBalances = _CalculateTotalBalance(vFileData);
+        double TotalBalances = _CalculateTotalBalance(vFileData);
         std::cout << "\n____________________________________________________________________________________________________________________\n\n\n";
         std::cout << "\t\t\t\t Total Balance = " << TotalBalances << "\n\n";
         std::cout << "\t\t\t\t\t   ( " << clsUtil::NumberToText(TotalBalances) << ")";

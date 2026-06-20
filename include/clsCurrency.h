@@ -16,7 +16,7 @@ private:
     std::string _Country;
     std::string _CurrencyCode;
     std::string _CurrencyName;
-    float _Rate;
+    double _Rate;
 
     static clsCurrency _ConvertLinetoCurrencyObject(std::string Line, std::string Seperator = "#//#")
     {
@@ -122,7 +122,7 @@ private:
 
 public:
 
-    clsCurrency(enMode Mode, std::string Country, std::string CurrencyCode, std::string CurrencyName, float Rate)
+    clsCurrency(enMode Mode, std::string Country, std::string CurrencyCode, std::string CurrencyName, double Rate)
     {
         _Mode = Mode;
         _Country = Country;
@@ -158,13 +158,13 @@ public:
         return _CurrencyName;
     }
 
-    void UpdateRate(float NewRate)
+    void UpdateRate(double NewRate)
     {
         _Rate = NewRate;
         _Update();
     }
 
-    float Rate()
+    double Rate()
     {
         return _Rate;
     }
@@ -227,7 +227,7 @@ public:
         return _GetEmptyCurrencyObject();
 
     }
-    float ConvertToUSD(float Amount)
+    double ConvertToUSD(double Amount)
     {
         return Amount / Rate();
     }
@@ -242,16 +242,16 @@ public:
     {
         return _LoadCurrencysDataFromFile();
     }
-    float ConvertToOtherCurrency(float Amount, clsCurrency Currency2)
+    double ConvertToOtherCurrency(double Amount, clsCurrency Currency2)
     {
-        float AmountInUSD = ConvertToUSD(Amount);
+        double AmountInUSD = ConvertToUSD(Amount);
 
         if (Currency2.CurrencyCode() == "USD")
         {
             return AmountInUSD;
         }
 
-        return (float)(AmountInUSD * Currency2.Rate());
+        return (double)(AmountInUSD * Currency2.Rate());
 
     }
 };

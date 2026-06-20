@@ -19,7 +19,7 @@ private:
     enMode _Mode;
     std::string _AccountNumber;
     std::string _PinCode;
-    float _AccountBalance;
+    double _AccountBalance;
     bool _IsDeleted = false;
 
     void _MarkAccountToDelete(std::vector <clsBankClient>& vClientInfo, std::string AccountNum)
@@ -46,7 +46,7 @@ private:
                 _vClientData[3],                 // Phone  
                 _vClientData[4],                 // AccountNumber
                 _vClientData[5],                 // PinCode
-                std::stof(_vClientData[6])            // AccountBalance as float
+                std::stod(_vClientData[6])            // AccountBalance as double
             );
         }
         else
@@ -180,7 +180,7 @@ private:
             return clsBankClient(enMode::enEmptyMode, "", "", "", "", "", "", 0);
         }
    
-    std::string _PrepareTransferLogRecord(float Amount, clsBankClient DestinationClient,
+    std::string _PrepareTransferLogRecord(double Amount, clsBankClient DestinationClient,
         std::string UserName, std::string Seperator = "#//#")
     {
         std::string TransferLogRecord = "";
@@ -211,7 +211,7 @@ private:
         return TrnsferLogRecord;
 
     }
-    void _RegisterTransferLog(float Amount, clsBankClient DestinationClient, std::string UserName)
+    void _RegisterTransferLog(double Amount, clsBankClient DestinationClient, std::string UserName)
     {
 
         std::string stDataLine = _PrepareTransferLogRecord(Amount, DestinationClient, UserName);
@@ -231,7 +231,7 @@ private:
 public:
     clsBankClient(enMode Mode, std::string FirstName, std::string LastName,
         std::string Email, std::string Phone, std::string AccountNumber, std::string PinCode,
-        float AccountBalance) :
+        double AccountBalance) :
         clsPerson(FirstName, LastName, Email, Phone)
 
     {
@@ -247,9 +247,9 @@ public:
         std::string DateTime;
         std::string SourceAccountNumber;
         std::string DestinationAccountNumber;
-        float  Amount;
-        float  srcBalanceAfter;
-        float  destBalanceAfter;
+        double  Amount;
+        double  srcBalanceAfter;
+        double  destBalanceAfter;
         std::string UserName;
     };
 
@@ -268,15 +268,15 @@ public:
     }
     __declspec(property(get = GetPinCode, put = SetPinCode)) std::string PinCode;
 
-    void SetAccountBalance(float AccountBalance)
+    void SetAccountBalance(double AccountBalance)
     {
         _AccountBalance = AccountBalance;
     }
-    float GetAccountBalance()
+    double GetAccountBalance()
     {
         return _AccountBalance;
     }
-    __declspec(property(get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
+    __declspec(property(get = GetAccountBalance, put = SetAccountBalance)) double AccountBalance;
 
     static bool IsClientExist(std::string AccountNumber)
     {
@@ -441,7 +441,7 @@ public:
        }
 
    }
-   bool Transfer(float Amount, clsBankClient& DestinationClient, std::string UserName)
+   bool Transfer(double Amount, clsBankClient& DestinationClient, std::string UserName)
    {
        if (Amount > AccountBalance)
        {

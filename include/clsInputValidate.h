@@ -96,7 +96,7 @@ public:
 
 	static double ReadFloatNumber(std::string ErrorMessage = "Invalid Number, Enter again\n")
 	{
-		float Number;
+		double Number;
 		while (!(std::cin >> Number)) {
 			std::cin.clear();
 			std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -107,7 +107,7 @@ public:
 
 	static double ReadFloatNumberBetween(double From, double To, std::string ErrorMessage = "Number is not within range, Enter again:\n")
 	{
-		float Number = ReadFloatNumber();
+		double Number = ReadFloatNumber();
 
 		while (!IsNumberBetween(Number, From, To)) {
 			std::cout << ErrorMessage;

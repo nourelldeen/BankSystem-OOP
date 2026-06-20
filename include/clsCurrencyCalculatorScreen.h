@@ -9,10 +9,10 @@ class clsCurrencyCalculatorScreen :protected clsScreen
 {
 private:
 
-    static float _ReadAmount()
+    static double _ReadAmount()
     {
         std::cout << "\nEnter Amount to Exchange: ";
-        float Amount = 0;
+        double Amount = 0;
 
         Amount = clsInputValidate::ReadFloatNumber();
         return Amount;
@@ -50,12 +50,12 @@ private:
 
     }
 
-    static void _PrintCalculationsResults(float Amount, clsCurrency Currency1, clsCurrency Currency2)
+    static void _PrintCalculationsResults(double Amount, clsCurrency Currency1, clsCurrency Currency2)
     {
 
         _PrintCurrencyCard(Currency1, "Convert From:");
 
-        float AmountInUSD = Currency1.ConvertToUSD(Amount);
+        double AmountInUSD = Currency1.ConvertToUSD(Amount);
 
         std::cout << Amount << " " << Currency1.CurrencyCode()
             << " = " << AmountInUSD << " USD\n";
@@ -69,7 +69,7 @@ private:
 
         _PrintCurrencyCard(Currency2, "To:");
 
-        float AmountInCurrrency2 = Currency1.ConvertToOtherCurrency(Amount, Currency2);
+        double AmountInCurrrency2 = Currency1.ConvertToOtherCurrency(Amount, Currency2);
 
         std::cout << Amount << " " << Currency1.CurrencyCode()
             << " = " << AmountInCurrrency2 << " " << Currency2.CurrencyCode();
@@ -89,7 +89,7 @@ public:
 
             clsCurrency CurrencyFrom = _GetCurrency("\nPlease Enter Currency1 Code: ");
             clsCurrency CurrencyTo = _GetCurrency("\nPlease Enter Currency2 Code: ");
-            float Amount = _ReadAmount();
+            double Amount = _ReadAmount();
 
             _PrintCalculationsResults(Amount, CurrencyFrom, CurrencyTo);
 

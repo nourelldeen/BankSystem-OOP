@@ -9,10 +9,10 @@ class clsUpdateCurrencyRateScreen :protected clsScreen
 {
 private:
 
-    static float _ReadRate()
+    static double _ReadRate()
     {
         std::cout << "\nEnter New Rate: ";
-        float NewRate = 0;
+        double NewRate = 0;
 
         NewRate = clsInputValidate::ReadFloatNumber();
         return NewRate;
