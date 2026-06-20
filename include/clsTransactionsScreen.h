@@ -7,7 +7,7 @@
 #include "clsDepositScreen.h"
 #include "clsWithdrawScreen.h"
 #include "clsTotalBalanceScreen.h"
-#include "clsTransfareScreen.h"
+#include "clsTransferScreen.h"
 #include "clsTransferLogScreen.h"
 
 
