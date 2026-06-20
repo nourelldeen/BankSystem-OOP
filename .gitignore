@@ -28,3 +28,7 @@ Thumbs.db
 
 # Data files (optional - remove if you want to track them)
 *.txt
+# Visual Studio cache and build folders
+.vs/
+x64/
+Convert .1ac053cf/
