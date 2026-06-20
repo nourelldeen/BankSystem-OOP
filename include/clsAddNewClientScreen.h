@@ -11,38 +11,38 @@ class clsAddNewClientScreen : protected clsScreen
 private:
     static void _ReadClientInfo(clsBankClient& Client)
     {
-        cout << "\nEnter FirstName: ";
+        std::cout << "\nEnter FirstName: ";
         Client.FirstName = clsInputValidate::ReadString();
 
-        cout << "\nEnter LastName: ";
+        std::cout << "\nEnter LastName: ";
         Client.LastName = clsInputValidate::ReadString();
 
-        cout << "\nEnter Email: ";
+        std::cout << "\nEnter Email: ";
         Client.Email = clsInputValidate::ReadString();
 
-        cout << "\nEnter Phone: ";
+        std::cout << "\nEnter Phone: ";
         Client.Phone = clsInputValidate::ReadString();
 
-        cout << "\nEnter PinCode: ";
+        std::cout << "\nEnter PinCode: ";
         Client.PinCode = clsInputValidate::ReadString();
 
-        cout << "\nEnter Account Balance: ";
+        std::cout << "\nEnter Account Balance: ";
         Client.AccountBalance = clsInputValidate::ReadFloatNumber();
     }
 
     static void _PrintClient(clsBankClient Client)
     {
-        cout << "\nClient Card:";
-        cout << "\n___________________";
-        cout << "\nFirstName   : " << Client.FirstName;
-        cout << "\nLastName    : " << Client.LastName;
-        cout << "\nFull Name   : " << Client.FullName();
-        cout << "\nEmail       : " << Client.Email;
-        cout << "\nPhone       : " << Client.Phone;
-        cout << "\nAcc. Number : " << Client.GetAccountNumber();
-        cout << "\nPassword    : " << Client.PinCode;
-        cout << "\nBalance     : " << Client.AccountBalance;
-        cout << "\n___________________\n";
+        std::cout << "\nClient Card:";
+        std::cout << "\n___________________";
+        std::cout << "\nFirstName   : " << Client.FirstName;
+        std::cout << "\nLastName    : " << Client.LastName;
+        std::cout << "\nFull Name   : " << Client.FullName();
+        std::cout << "\nEmail       : " << Client.Email;
+        std::cout << "\nPhone       : " << Client.Phone;
+        std::cout << "\nAcc. Number : " << Client.GetAccountNumber();
+        std::cout << "\nPassword    : " << Client.PinCode;
+        std::cout << "\nBalance     : " << Client.AccountBalance;
+        std::cout << "\n___________________\n";
 
     }
 
@@ -58,13 +58,13 @@ public:
 
         _DrawScreenHeader("\t  Add New Client Screen");
 
-        string AccountNumber = "";
+        std::string AccountNumber = "";
 
-        cout << "\nPlease Enter Account Number: ";
+        std::cout << "\nPlease Enter Account Number: ";
         AccountNumber = clsInputValidate::ReadString();
         while (clsBankClient::IsClientExist(AccountNumber))
         {
-            cout << "\nAccount Number Is Already Used, Choose another one: ";
+            std::cout << "\nAccount Number Is Already Used, Choose another one: ";
             AccountNumber = clsInputValidate::ReadString();
         }
 
@@ -81,19 +81,19 @@ public:
         {
         case  clsBankClient::enSaveResults::svSucceeded:
         {
-            cout << "\nAccount Added Successfully :-)\n";
+            std::cout << "\nAccount Added Successfully :-)\n";
             _PrintClient(NewClient);
             break;
         }
         case clsBankClient::enSaveResults::svFaildEmptyObject:
         {
-            cout << "\nError account was not saved because it's Empty";
+            std::cout << "\nError account was not saved because it's Empty";
             break;
 
         }
         case clsBankClient::enSaveResults::svFaildAccountNumberExists:
         {
-            cout << "\nError account was not saved because account number is used!\n";
+            std::cout << "\nError account was not saved because account number is used!\n";
             break;
 
         }

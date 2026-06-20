@@ -11,17 +11,17 @@ class clsFindUserScreen :protected clsScreen
 private:
     static void _PrintUser(clsUser User)
     {
-        cout << "\nUser Card:";
-        cout << "\n___________________";
-        cout << "\nFirstName   : " << User.FirstName;
-        cout << "\nLastName    : " << User.LastName;
-        cout << "\nFull Name   : " << User.FullName();
-        cout << "\nEmail       : " << User.Email;
-        cout << "\nPhone       : " << User.Phone;
-        cout << "\nUserName    : " << User.UserName;
-        cout << "\nPassword    : " << User.Password;
-        cout << "\nPermissions : " << User.Permissions;
-        cout << "\n___________________\n";
+        std::cout << "\nUser Card:";
+        std::cout << "\n___________________";
+        std::cout << "\nFirstName   : " << User.FirstName;
+        std::cout << "\nLastName    : " << User.LastName;
+        std::cout << "\nFull Name   : " << User.FullName();
+        std::cout << "\nEmail       : " << User.Email;
+        std::cout << "\nPhone       : " << User.Phone;
+        std::cout << "\nUserName    : " << User.UserName;
+        std::cout << "\nPassword    : " << User.Password;
+        std::cout << "\nPermissions : " << User.Permissions;
+        std::cout << "\n___________________\n";
 
     }
 
@@ -31,12 +31,12 @@ public:
     {
         _DrawScreenHeader("\t  Find User Screen");
 
-        string UserName;
-        cout << "\nPlease Enter UserName: ";
+        std::string UserName;
+        std::cout << "\nPlease Enter UserName: ";
         UserName = clsInputValidate::ReadString();
         while (!clsUser::IsUserExist(UserName))
         {
-            cout << "\nUser is not found, choose another one: ";
+            std::cout << "\nUser is not found, choose another one: ";
             UserName = clsInputValidate::ReadString();
         }
 
@@ -44,11 +44,11 @@ public:
 
         if (!User1.IsEmpty())
         {
-            cout << "\nUser Found :-)\n";
+            std::cout << "\nUser Found :-)\n";
         }
         else
         {
-            cout << "\nUser Was not Found :-(\n";
+            std::cout << "\nUser Was not Found :-(\n";
         }
 
         _PrintUser(User1);

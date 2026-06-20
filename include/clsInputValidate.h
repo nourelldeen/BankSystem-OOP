@@ -60,79 +60,79 @@ public:
 		return false;
 	}
 
-	static int ReadIntNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	static int ReadIntNumber(std::string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		int Number;
-		while (!(cin >> Number)) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << ErrorMessage;
+		while (!(std::cin >> Number)) {
+			std::cin.clear();
+			std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			std::cout << ErrorMessage;
 		}
 		return Number;
 	}
 
-	static short ReadShortNumberBetween(short From, short To, string ErrorMessage = "Number is not within range, Enter again:\n")
+	static short ReadShortNumberBetween(short From, short To, std::string ErrorMessage = "Number is not within range, Enter again:\n")
 	{
 		short Number = ReadIntNumber();
 
 		while (!IsNumberBetween(Number, From, To))
 		{
-			cout << ErrorMessage;
+			std::cout << ErrorMessage;
 			Number = ReadIntNumber();
 		}
 		return Number;
 	}
-	static int ReadIntNumberBetween(int From, int To, string ErrorMessage = "Number is not within range, Enter again:\n")
+	static int ReadIntNumberBetween(int From, int To, std::string ErrorMessage = "Number is not within range, Enter again:\n")
 	{
 		int Number = ReadIntNumber();
 
 		while (!IsNumberBetween(Number, From, To))
 		{
-			cout << ErrorMessage;
+			std::cout << ErrorMessage;
 			Number = ReadIntNumber();
 		}
 		return Number;
 	}
 
-	static double ReadFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	static double ReadFloatNumber(std::string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		float Number;
-		while (!(cin >> Number)) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << ErrorMessage;
+		while (!(std::cin >> Number)) {
+			std::cin.clear();
+			std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			std::cout << ErrorMessage;
 		}
 		return Number;
 	}
 
-	static double ReadFloatNumberBetween(double From, double To, string ErrorMessage = "Number is not within range, Enter again:\n")
+	static double ReadFloatNumberBetween(double From, double To, std::string ErrorMessage = "Number is not within range, Enter again:\n")
 	{
 		float Number = ReadFloatNumber();
 
 		while (!IsNumberBetween(Number, From, To)) {
-			cout << ErrorMessage;
+			std::cout << ErrorMessage;
 			Number = ReadDblNumber();
 		}
 		return Number;
 	}
 
-	static double ReadDblNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	static double ReadDblNumber(std::string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		double Number;
-		while (!(cin >> Number)) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << ErrorMessage;
+		while (!(std::cin >> Number)) {
+			std::cin.clear();
+			std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			std::cout << ErrorMessage;
 		}
 		return Number;
 	}
 
-	static double ReadDblNumberBetween(double From, double To, string ErrorMessage = "Number is not within range, Enter again:\n")
+	static double ReadDblNumberBetween(double From, double To, std::string ErrorMessage = "Number is not within range, Enter again:\n")
 	{
 		double Number = ReadDblNumber();
 
 		while (!IsNumberBetween(Number, From, To)) {
-			cout << ErrorMessage;
+			std::cout << ErrorMessage;
 			Number = ReadDblNumber();
 		}
 		return Number;
@@ -143,11 +143,11 @@ public:
 		return	clsDate::IsValidDate(Date);
 	}
 
-	static string ReadString()
+	static std::string ReadString()
 	{
-		string  S1 = "";
+		std::string  S1 = "";
 		// Usage of std::ws will extract allthe whitespace character
-		getline(cin >> ws, S1);
+		getline(std::cin >> ws, S1);
 		return S1;
 	}
 };

@@ -11,24 +11,24 @@ class clsTransferScreen :protected clsScreen
 private:
     static void _PrintClient(clsBankClient Client)
     {
-        cout << "\nClient Card:";
-        cout << "\n___________________\n";
-        cout << "\nFull Name   : " << Client.FullName();
-        cout << "\nAcc. Number : " << Client.GetAccountNumber();
-        cout << "\nBalance     : " << Client.AccountBalance;
-        cout << "\n___________________\n";
+        std::cout << "\nClient Card:";
+        std::cout << "\n___________________\n";
+        std::cout << "\nFull Name   : " << Client.FullName();
+        std::cout << "\nAcc. Number : " << Client.GetAccountNumber();
+        std::cout << "\nBalance     : " << Client.AccountBalance;
+        std::cout << "\n___________________\n";
 
     }
 
-    static string _ReadAccountNumber(string Prompt)
+    static std::string _ReadAccountNumber(std::string Prompt)
     {
-        string AccountNumber;
-        cout << Prompt;
+        std::string AccountNumber;
+        std::cout << Prompt;
 
         AccountNumber = clsInputValidate::ReadString();
         while (!clsBankClient::IsClientExist(AccountNumber))
         {
-            cout << "\nAccount number is not found, choose another one: ";
+            std::cout << "\nAccount number is not found, choose another one: ";
             AccountNumber = clsInputValidate::ReadString();
         }
         return AccountNumber;
@@ -38,13 +38,13 @@ private:
     {
         float Amount;
 
-        cout << "\nEnter Transfer Amount? ";
+        std::cout << "\nEnter Transfer Amount? ";
 
         Amount = clsInputValidate::ReadFloatNumber();
 
         while (Amount > SourceClient.AccountBalance)
         {
-            cout << "\nAmount Exceeds the available Balance, Enter another Amount ? ";
+            std::cout << "\nAmount Exceeds the available Balance, Enter another Amount ? ";
             Amount = clsInputValidate::ReadDblNumber();
         }
         return Amount;
@@ -68,18 +68,18 @@ public:
         float Amount = _ReadAmount(SourceClient);
 
 
-        cout << "\nAre you sure you want to perform this operation? y/n? ";
+        std::cout << "\nAre you sure you want to perform this operation? y/n? ";
         char Answer = 'n';
-        cin >> Answer;
+        std::cin >> Answer;
         if (Answer == 'Y' || Answer == 'y')
         {
             if (SourceClient.Transfer(Amount, DestinationClient, CurrentUser.UserName))
             {
-                cout << "\nTransfer done successfully\n";
+                std::cout << "\nTransfer done successfully\n";
             }
             else
             {
-                cout << "\nTransfer Faild \n";
+                std::cout << "\nTransfer Faild \n";
             }
         }
 

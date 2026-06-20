@@ -8,82 +8,81 @@
 #include "clsDate.h"
 #include "clsUtil.h"
 
-using namespace std;
 class clsUser : public clsPerson
 {
 private:
 
     enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
     enMode _Mode;
-    string _UserName;
-    string _Password;
+    std::string _UserName;
+    std::string _Password;
     int _Permissions;
 
     bool _MarkedForDelete = false;
     struct stLoginRegisterRecord;
 
-    static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(string Line, string Seperator = "#//#")
+    static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(std::string Line, std::string Seperator = "#//#")
     {
         stLoginRegisterRecord LoginRegisterRecord;
 
 
-        vector <string> LoginRegisterDataLine = clsString::Split(Line, Seperator);
+        std::vector <std::string> LoginRegisterDataLine = clsString::Split(Line, Seperator);
         LoginRegisterRecord.DateTime = LoginRegisterDataLine[0];
         LoginRegisterRecord.UserName = LoginRegisterDataLine[1];
         LoginRegisterRecord.Password = clsUtil::DecryptText(LoginRegisterDataLine[2]);
-        LoginRegisterRecord.Permissions = stoi(LoginRegisterDataLine[3]);
+        LoginRegisterRecord.Permissions = std::stoi(LoginRegisterDataLine[3]);
 
         return LoginRegisterRecord;
 
     }
-     string _PrepareLoginRecord(string Seperator = "#//#")
+     std::string _PrepareLoginRecord(std::string Seperator = "#//#")
     {
-        string LoginRecord = "";
+        std::string LoginRecord = "";
         LoginRecord = clsDate::GetSystemDateTimeString() + Seperator
             + UserName + Seperator
             + clsUtil::EncryptText(Password) + Seperator
-            + to_string(Permissions);
+            + std::to_string(Permissions);
         return LoginRecord;
     }
 
-    static clsUser _ConvertLinetoUserObject(string Line, string Seperator = "#//#")
+    static clsUser _ConvertLinetoUserObject(std::string Line, std::string Seperator = "#//#")
     {
-        vector<string> vUserData;
+        std::vector<std::string> vUserData;
         vUserData = clsString::Split(Line, Seperator);
 
         return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
-            vUserData[3], vUserData[4], clsUtil::DecryptText(vUserData[5]), stoi(vUserData[6]));
+            vUserData[3], vUserData[4], clsUtil::DecryptText(vUserData[5]), std::stoi(vUserData[6]));
 
     }
 
-    static string _ConverUserObjectToLine(clsUser User, string Seperator = "#//#")
+    static std::string _ConverUserObjectToLine(clsUser User, std::string Seperator = "#//#")
     {
 
-        string UserRecord = "";
+        std::string UserRecord = "";
         UserRecord += User.FirstName + Seperator;
         UserRecord += User.LastName + Seperator;
         UserRecord += User.Email + Seperator;
         UserRecord += User.Phone + Seperator;
         UserRecord += User.UserName + Seperator;
         UserRecord += clsUtil::EncryptText(User.Password) + Seperator;
-        UserRecord += to_string(User.Permissions);
+        UserRecord += std::to_string(User.Permissions);
 
         return UserRecord;
 
     }
 
-    static  vector <clsUser> _LoadUsersDataFromFile()
+    static  std::vector <clsUser> _LoadUsersDataFromFile()
     {
 
-        vector <clsUser> vUsers;
+        std::vector <clsUser> vUsers;
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Users.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
 
-            string Line;
+            std::string Line;
 
 
             while (getline(MyFile, Line))
@@ -102,13 +101,13 @@ private:
 
     }
 
-    static void _SaveUsersDataToFile(vector <clsUser> vUsers)
+    static void _SaveUsersDataToFile(std::vector <clsUser> vUsers)
     {
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Users.txt", ios::out);//overwrite
 
-        string DataLine;
+        std::string DataLine;
 
         if (MyFile.is_open())
         {
@@ -119,7 +118,7 @@ private:
                 {
                     //we only write records that are not marked for delete.  
                     DataLine = _ConverUserObjectToLine(U);
-                    MyFile << DataLine << endl;
+                    MyFile << DataLine << std::endl;
 
                 }
 
@@ -133,7 +132,7 @@ private:
 
     void _Update()
     {
-        vector <clsUser> _vUsers;
+        std::vector <clsUser> _vUsers;
         _vUsers = _LoadUsersDataFromFile();
 
         for (clsUser& U : _vUsers)
@@ -156,15 +155,15 @@ private:
         _AddDataLineToFile(_ConverUserObjectToLine(*this));
     }
 
-    void _AddDataLineToFile(string  stDataLine)
+    void _AddDataLineToFile(std::string  stDataLine)
     {
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Users.txt", ios::out | ios::app);
 
         if (MyFile.is_open())
         {
 
-            MyFile << stDataLine << endl;
+            MyFile << stDataLine << std::endl;
 
             MyFile.close();
         }
@@ -185,15 +184,15 @@ public:
 
     struct stLoginRegisterRecord
     {
-        string DateTime;
-        string UserName;
-        string Password;
+        std::string DateTime;
+        std::string UserName;
+        std::string Password;
         int Permissions;
 
     };
 
-    clsUser(enMode Mode, string FirstName, string LastName,
-        string Email, string Phone, string UserName, string Password,
+    clsUser(enMode Mode, std::string FirstName, std::string LastName,
+        std::string Email, std::string Phone, std::string UserName, std::string Password,
         int Permissions) :
         clsPerson(FirstName, LastName, Email, Phone)
 
@@ -214,28 +213,28 @@ public:
         return _MarkedForDelete;
     }
 
-    string GetUserName()
+    std::string GetUserName()
     {
         return _UserName;
     }
 
-    void SetUserName(string UserName)
+    void SetUserName(std::string UserName)
     {
         _UserName = UserName;
     }
 
-    __declspec(property(get = GetUserName, put = SetUserName)) string UserName;
+    __declspec(property(get = GetUserName, put = SetUserName)) std::string UserName;
 
-    void SetPassword(string Password)
+    void SetPassword(std::string Password)
     {
         _Password = Password;
     }
 
-    string GetPassword()
+    std::string GetPassword()
     {
         return _Password;
     }
-    __declspec(property(get = GetPassword, put = SetPassword)) string Password;
+    __declspec(property(get = GetPassword, put = SetPassword)) std::string Password;
 
     void SetPermissions(int Permissions)
     {
@@ -248,14 +247,14 @@ public:
     }
     __declspec(property(get = GetPermissions, put = SetPermissions)) int Permissions;
 
-    static clsUser Find(string UserName)
+    static clsUser Find(std::string UserName)
     {
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Users.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
-            string Line;
+            std::string Line;
             while (getline(MyFile, Line))
             {
                 clsUser User = _ConvertLinetoUserObject(Line);
@@ -273,15 +272,15 @@ public:
         return _GetEmptyUserObject();
     }
 
-    static clsUser Find(string UserName, string Password)
+    static clsUser Find(std::string UserName, std::string Password)
     {
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Users.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
-            string Line;
+            std::string Line;
             while (getline(MyFile, Line))
             {
                 clsUser User = _ConvertLinetoUserObject(Line);
@@ -343,7 +342,7 @@ public:
 
     }
 
-    static bool IsUserExist(string UserName)
+    static bool IsUserExist(std::string UserName)
     {
 
         clsUser User = clsUser::Find(UserName);
@@ -352,7 +351,7 @@ public:
 
     bool Delete()
     {
-        vector <clsUser> _vUsers;
+        std::vector <clsUser> _vUsers;
         _vUsers = _LoadUsersDataFromFile();
 
         for (clsUser& U : _vUsers)
@@ -373,12 +372,12 @@ public:
 
     }
 
-    static clsUser GetAddNewUserObject(string UserName)
+    static clsUser GetAddNewUserObject(std::string UserName)
     {
         return clsUser(enMode::AddNewMode, "", "", "", "", UserName, "", 0);
     }
 
-    static vector <clsUser> GetUsersList()
+    static std::vector <clsUser> GetUsersList()
     {
         return _LoadUsersDataFromFile();
     }
@@ -398,32 +397,32 @@ public:
     void RegisterLogIn()
     {
 
-        string stDataLine = _PrepareLoginRecord();
+        std::string stDataLine = _PrepareLoginRecord();
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("LoginRegister.txt", ios::out | ios::app);
 
         if (MyFile.is_open())
         {
 
-            MyFile << stDataLine << endl;
+            MyFile << stDataLine << std::endl;
 
             MyFile.close();
         }
 
     }
 
-    static  vector <stLoginRegisterRecord> GetLoginRegisterList()
+    static  std::vector <stLoginRegisterRecord> GetLoginRegisterList()
     {
-        vector <stLoginRegisterRecord> vLoginRegisterRecord;
+        std::vector <stLoginRegisterRecord> vLoginRegisterRecord;
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("LoginRegister.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
 
-            string Line;
+            std::string Line;
 
             stLoginRegisterRecord LoginRegisterRecord;
 

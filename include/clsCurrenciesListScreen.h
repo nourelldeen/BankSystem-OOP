@@ -12,10 +12,10 @@ private:
     static void PrintCurrencyRecordLine(clsCurrency Currency)
     {
 
-        cout << setw(8) << left << "" << "| " << setw(30) << left << Currency.Country();
-        cout << "| " << setw(8) << left << Currency.CurrencyCode();
-        cout << "| " << setw(45) << left << Currency.CurrencyName();
-        cout << "| " << setw(10) << left << Currency.Rate();
+        std::cout << std::setw(8) << std::left << "" << "| " << std::setw(30) << std::left << Currency.Country();
+        std::cout << "| " << std::setw(8) << std::left << Currency.CurrencyCode();
+        std::cout << "| " << std::setw(45) << std::left << Currency.CurrencyName();
+        std::cout << "| " << std::setw(10) << std::left << Currency.Rate();
 
     }
 
@@ -26,34 +26,34 @@ public:
     {
 
 
-        vector <clsCurrency> vCurrencys = clsCurrency::GetCurrenciesList();
-        string Title = "\t  Currencies List Screen";
-        string SubTitle = "\t    (" + to_string(vCurrencys.size()) + ") Currency.";
+        std::vector <clsCurrency> vCurrencys = clsCurrency::GetCurrenciesList();
+        std::string Title = "\t  Currencies List Screen";
+        std::string SubTitle = "\t    (" + std::to_string(vCurrencys.size()) + ") Currency.";
 
         _DrawScreenHeader(Title, SubTitle);
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "_______________________________________________\n" << endl;
+        std::cout << std::setw(8) << std::left << "" << "\n\t_______________________________________________________";
+        std::cout << "_______________________________________________\n" << std::endl;
 
-        cout << setw(8) << left << "" << "| " << left << setw(30) << "Country";
-        cout << "| " << left << setw(8) << "Code";
-        cout << "| " << left << setw(45) << "Name";
-        cout << "| " << left << setw(10) << "Rate/(1$)";
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "_______________________________________________\n" << endl;
+        std::cout << std::setw(8) << std::left << "" << "| " << std::left << std::setw(30) << "Country";
+        std::cout << "| " << std::left << std::setw(8) << "Code";
+        std::cout << "| " << std::left << std::setw(45) << "Name";
+        std::cout << "| " << std::left << std::setw(10) << "Rate/(1$)";
+        std::cout << std::setw(8) << std::left << "" << "\n\t_______________________________________________________";
+        std::cout << "_______________________________________________\n" << std::endl;
 
         if (vCurrencys.size() == 0)
-            cout << "\t\t\t\tNo Currencies Available In the System!";
+            std::cout << "\t\t\t\tNo Currencies Available In the System!";
         else
 
             for (clsCurrency Currency : vCurrencys)
             {
 
                 PrintCurrencyRecordLine(Currency);
-                cout << endl;
+                std::cout << std::endl;
             }
 
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "_______________________________________________\n" << endl;
+        std::cout << std::setw(8) << std::left << "" << "\n\t_______________________________________________________";
+        std::cout << "_______________________________________________\n" << std::endl;
 
     }
 

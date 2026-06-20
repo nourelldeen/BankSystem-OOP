@@ -9,12 +9,12 @@ private:
 
 	static bool _AddDeposit(clsBankClient& Client)
 	{
-		cout << "Please Enter Deposit Amount? ";
+		std::cout << "Please Enter Deposit Amount? ";
 		float deposit = clsInputValidate::ReadFloatNumber();
 
 		char sure = 'Y';
-		cout << "Are you sure you want to add this deposit? Y/N  ";
-		cin >> sure;
+		std::cout << "Are you sure you want to add this deposit? Y/N  ";
+		std::cin >> sure;
 
 		if (toupper(sure) != 'Y')
 		{
@@ -30,13 +30,13 @@ public:
 	{
 		_DrawScreenHeader("Deposit");
 
-		string AccountNumber;
-		cout << "Please enter the AccountNumber?\n";
+		std::string AccountNumber;
+		std::cout << "Please enter the AccountNumber?\n";
 		AccountNumber = clsInputValidate::ReadString();
 
 		while (!clsBankClient::IsClientExist(AccountNumber))
 		{
-			cout << "The Client Is Not Exist! Please Choose another PinCode:";
+			std::cout << "The Client Is Not Exist! Please Choose another PinCode:";
 			AccountNumber = clsInputValidate::ReadString();
 		}
 		clsBankClient Client = clsBankClient::Find(AccountNumber);
@@ -45,11 +45,11 @@ public:
 		if (_AddDeposit(Client))
 		{
 			Client.Print();
-			cout << "\nThe Process Done Successfully ;)\n";
+			std::cout << "\nThe Process Done Successfully ;)\n";
 		}
 		else
 		{
-			cout << "\nDeposit Cancelled.\n";
+			std::cout << "\nDeposit Cancelled.\n";
 		}
 	}
 

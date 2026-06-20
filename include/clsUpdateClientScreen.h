@@ -8,22 +8,22 @@ private :
     
     static void ReadClientInfo(clsBankClient& Client)
     {
-        cout << "\nEnter FirstName: ";
+        std::cout << "\nEnter FirstName: ";
         Client.FirstName = clsInputValidate::ReadString();
 
-        cout << "\nEnter LastName: ";
+        std::cout << "\nEnter LastName: ";
         Client.LastName = clsInputValidate::ReadString();
 
-        cout << "\nEnter Email: ";
+        std::cout << "\nEnter Email: ";
         Client.Email = clsInputValidate::ReadString();
 
-        cout << "\nEnter Phone: ";
+        std::cout << "\nEnter Phone: ";
         Client.Phone = clsInputValidate::ReadString();
 
-        cout << "\nEnter PinCode: ";
+        std::cout << "\nEnter PinCode: ";
         Client.PinCode = clsInputValidate::ReadString();
 
-        cout << "\nEnter Account Balance: ";
+        std::cout << "\nEnter Account Balance: ";
         Client.AccountBalance = clsInputValidate::ReadFloatNumber();
     }
 
@@ -38,14 +38,14 @@ public:
 
         _DrawScreenHeader("\tUpdate Client Screen");
 
-        string AccountNumber = "";
+        std::string AccountNumber = "";
 
-        cout << "\nPlease Enter client Account Number: ";
+        std::cout << "\nPlease Enter client Account Number: ";
         AccountNumber = clsInputValidate::ReadString();
 
         while (!clsBankClient::IsClientExist(AccountNumber))
         {
-            cout << "\nAccount number is not found, choose another one: ";
+            std::cout << "\nAccount number is not found, choose another one: ";
             AccountNumber = clsInputValidate::ReadString();
         }
 
@@ -53,16 +53,16 @@ public:
 
         Client.Print();
 
-        cout << "\nAre you sure you want to update this client y/n? ";
+        std::cout << "\nAre you sure you want to update this client y/n? ";
 
         char Answer = 'n';
-        cin >> Answer;
+        std::cin >> Answer;
 
         if (Answer == 'y' || Answer == 'Y')
         {
 
-            cout << "\n\nUpdate Client Info:";
-            cout << "\n____________________\n";
+            std::cout << "\n\nUpdate Client Info:";
+            std::cout << "\n____________________\n";
 
 
             ReadClientInfo(Client);
@@ -75,14 +75,14 @@ public:
             {
             case  clsBankClient::enSaveResults::svSucceeded:
             {
-                cout << "\nAccount Updated Successfully :-)\n";
+                std::cout << "\nAccount Updated Successfully :-)\n";
 
                 Client.Print();
                 break;
             }
             case clsBankClient::enSaveResults::svFaildEmptyObject:
             {
-                cout << "\nError account was not saved because it's Empty";
+                std::cout << "\nError account was not saved because it's Empty";
                 break;
 
             }

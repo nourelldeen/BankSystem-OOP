@@ -10,14 +10,14 @@ class clsFindCurrencyScreen :protected clsScreen
 private:
     static void _PrintCurrency(clsCurrency Currency)
     {
-        cout << "\nCurrency Card:\n";
-        cout << "_____________________________\n";
-        cout << "\nCountry    : " << Currency.Country();
-        cout << "\nCode       : " << Currency.CurrencyCode();
-        cout << "\nName       : " << Currency.CurrencyName();
-        cout << "\nRate(1$) = : " << Currency.Rate();
+        std::cout << "\nCurrency Card:\n";
+        std::cout << "_____________________________\n";
+        std::cout << "\nCountry    : " << Currency.Country();
+        std::cout << "\nCode       : " << Currency.CurrencyCode();
+        std::cout << "\nName       : " << Currency.CurrencyName();
+        std::cout << "\nRate(1$) = : " << Currency.Rate();
 
-        cout << "\n_____________________________\n";
+        std::cout << "\n_____________________________\n";
 
     }
 
@@ -25,12 +25,12 @@ private:
     {
         if (!Currency.IsEmpty())
         {
-            cout << "\nCurrency Found :-)\n";
+            std::cout << "\nCurrency Found :-)\n";
             _PrintCurrency(Currency);
         }
         else
         {
-            cout << "\nCurrency Was not Found :-(\n";
+            std::cout << "\nCurrency Was not Found :-(\n";
         }
     }
 
@@ -41,23 +41,23 @@ public:
 
         _DrawScreenHeader("\t  Find Currency Screen");
 
-        cout << "\nFind By: [1] Code or [2] Country ? ";
+        std::cout << "\nFind By: [1] Code or [2] Country ? ";
         short Answer = 1;
 
-        cin >> Answer;
+        std::cin >> Answer;
 
         if (Answer == 1)
         {
-            string CurrencyCode;
-            cout << "\nPlease Enter CurrencyCode: ";
+            std::string CurrencyCode;
+            std::cout << "\nPlease Enter CurrencyCode: ";
             CurrencyCode = clsInputValidate::ReadString();
             clsCurrency Currency = clsCurrency::FindByCode(CurrencyCode);
             _ShowResults(Currency);
         }
         else
         {
-            string Country;
-            cout << "\nPlease Enter Country Name: ";
+            std::string Country;
+            std::cout << "\nPlease Enter Country Name: ";
             Country = clsInputValidate::ReadString();
             clsCurrency Currency = clsCurrency::FindByCountry(Country);
             _ShowResults(Currency);

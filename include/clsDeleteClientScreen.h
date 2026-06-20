@@ -7,17 +7,17 @@ class clsDeleteClientScreen : protected clsScreen
 private:
     static void _Print(clsBankClient& client)
     {
-        cout << "\nClient Card:";
-        cout << "\n___________________";
-        cout << "\nFirstName   : " << client.FirstName;
-        cout << "\nLastName    : " << client.LastName;
-        cout << "\nFull Name   : " << client.FullName();
-        cout << "\nEmail       : " << client.Email;
-        cout << "\nPhone       : " << client.Phone;
-        cout << "\nAcc. Number : " << client.GetAccountNumber();
-        cout << "\nPin Code    : " << client.GetPinCode();
-        cout << "\nBalance     : " << client.GetAccountBalance();
-        cout << "\n___________________\n";
+        std::cout << "\nClient Card:";
+        std::cout << "\n___________________";
+        std::cout << "\nFirstName   : " << client.FirstName;
+        std::cout << "\nLastName    : " << client.LastName;
+        std::cout << "\nFull Name   : " << client.FullName();
+        std::cout << "\nEmail       : " << client.Email;
+        std::cout << "\nPhone       : " << client.Phone;
+        std::cout << "\nAcc. Number : " << client.GetAccountNumber();
+        std::cout << "\nPin Code    : " << client.GetPinCode();
+        std::cout << "\nBalance     : " << client.GetAccountBalance();
+        std::cout << "\n___________________\n";
     }
 
 public:
@@ -30,32 +30,32 @@ public:
 
         _DrawScreenHeader("\tDelete Screen");
 
-            string AccountNumber;
-            cout << "Please enter the AccountNumber?\n";
+            std::string AccountNumber;
+            std::cout << "Please enter the AccountNumber?\n";
             AccountNumber = clsInputValidate::ReadString();
 
             while (!clsBankClient::IsClientExist(AccountNumber))
             {
-                cout << "The Client Is NOT Exist! Please try again?\n";
+                std::cout << "The Client Is NOT Exist! Please try again?\n";
                 AccountNumber = clsInputValidate::ReadString();
             }
             clsBankClient Client = clsBankClient::Find(AccountNumber);
             Client.Print();
 
-            cout << "\nAre you sure you want to delete this account?  Y/N: ";
+            std::cout << "\nAre you sure you want to delete this account?  Y/N: ";
             char Sure = 'N';
-            cin >> Sure;
+            std::cin >> Sure;
 
             if (toupper(Sure) == 'Y')
             {
                 if (Client.Delete())
                 {
-                    cout << "\nClient Deleted Successfully :)\n";
+                    std::cout << "\nClient Deleted Successfully :)\n";
                     _Print(Client);
                 }
                 else
                 {
-                    cout << "\nError Client Was not Deleted\n";
+                    std::cout << "\nError Client Was not Deleted\n";
                 }
 
             }

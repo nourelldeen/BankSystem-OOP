@@ -7,13 +7,13 @@
 class clsLoginScreen : public clsScreen
 {
 private:
-	static void _GetUserNameAndPassword(string& UserName, string& Password)
+	static void _GetUserNameAndPassword(std::string& UserName, std::string& Password)
 	{
-		cout << "Enter User Name? ";
-		cin >> UserName;
+		std::cout << "Enter User Name? ";
+		std::cin >> UserName;
 
-		cout << "Enter Password? ";
-		cin >> Password;
+		std::cout << "Enter Password? ";
+		std::cin >> Password;
 
 	}
 
@@ -23,20 +23,20 @@ private:
 		bool LoginFaild = false;
 		short NumOfTries = 0;
 
-		string Username, Password;
+		std::string Username, Password;
 		do
 		{
 
 			if (LoginFaild)
 			{
 				NumOfTries++;
-				cout << "\nInvalid Username/Password!\n\n";
-				cout << "You have " << (3 - NumOfTries);
-				cout << " trail(s) to Login.\n";
+				std::cout << "\nInvalid Username/Password!\n\n";
+				std::cout << "You have " << (3 - NumOfTries);
+				std::cout << " trail(s) to Login.\n";
 			}
 			if (NumOfTries == 3)
 			{
-				cout << "You are Locked after 3 failed trails.\n\n";
+				std::cout << "You are Locked after 3 failed trails.\n\n";
 				return false;
 			}
 

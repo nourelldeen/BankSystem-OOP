@@ -11,19 +11,18 @@
 
 
 
-using namespace std;
 
 class clsBankClient : public clsPerson
 {
 private:
     enum enMode { enEmptyMode = 0, enUpdateMode = 1, enAddNew = 2, enDelete = 3 };
     enMode _Mode;
-    string _AccountNumber;
-    string _PinCode;
+    std::string _AccountNumber;
+    std::string _PinCode;
     float _AccountBalance;
     bool _IsDeleted = false;
 
-    void _MarkAccountToDelete(vector <clsBankClient>& vClientInfo, string AccountNum)
+    void _MarkAccountToDelete(std::vector <clsBankClient>& vClientInfo, std::string AccountNum)
     {
         for (clsBankClient& Client : vClientInfo)
         {
@@ -33,9 +32,9 @@ private:
     }
 
 
-    static clsBankClient _ConvertLinetoClientObject(string Line, string Seperator = "#//#")
+    static clsBankClient _ConvertLinetoClientObject(std::string Line, std::string Seperator = "#//#")
     {
-        vector<string> _vClientData;
+        std::vector<std::string> _vClientData;
         _vClientData = clsString::Split(Line, Seperator);
         if (_vClientData.size() >= 7)
         {
@@ -47,19 +46,19 @@ private:
                 _vClientData[3],                 // Phone  
                 _vClientData[4],                 // AccountNumber
                 _vClientData[5],                 // PinCode
-                stof(_vClientData[6])            // AccountBalance as float
+                std::stof(_vClientData[6])            // AccountBalance as float
             );
         }
         else
-            cout << "Error in Data File\n";
+            std::cout << "Error in Data File\n";
 
         return _GetEmptyClientObject();
 
     }
 
-    static string _ConvertObjectToLine(clsBankClient ClientInfo, string Seperator = "#//#")
+    static std::string _ConvertObjectToLine(clsBankClient ClientInfo, std::string Seperator = "#//#")
     {
-        string LineInfo;
+        std::string LineInfo;
 
         LineInfo =
             ClientInfo.FirstName + Seperator
@@ -68,20 +67,20 @@ private:
             + ClientInfo.Phone + Seperator
             + ClientInfo.GetAccountNumber() + Seperator
             + ClientInfo.PinCode + Seperator
-            + to_string(ClientInfo.AccountBalance);
+            + std::to_string(ClientInfo.AccountBalance);
         return LineInfo;
     }
 
-    static vector <clsBankClient> _GetDataFromFileToVector()
+    static std::vector <clsBankClient> _GetDataFromFileToVector()
     {
-        vector <clsBankClient> vFileData;
+        std::vector <clsBankClient> vFileData;
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Clients.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
-            string Line;
+            std::string Line;
             while (getline(MyFile, Line))
             {
                 if (!Line.empty())
@@ -90,58 +89,58 @@ private:
             MyFile.close();
         }
         else
-            cout << "The file can't open!\n";
+            std::cout << "The file can't open!\n";
 
         return vFileData;
     }
 
-    static void _UploadDataToFile(vector <clsBankClient>& vFileData)
+    static void _UploadDataToFile(std::vector <clsBankClient>& vFileData)
     {
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Clients.txt", ios::out);
 
         if (MyFile.is_open())
         {
-            string Line;
+            std::string Line;
             for (clsBankClient& ClientInfo : vFileData)
             {
                 if (ClientInfo._IsDeleted == false)
                 {
-                    MyFile << _ConvertObjectToLine(ClientInfo) << endl;
+                    MyFile << _ConvertObjectToLine(ClientInfo) << std::endl;
                 }
             }
             MyFile.close();
         }
         else
-            cout << "The file can't open!\n";
+            std::cout << "The file can't open!\n";
     }
 
     static void _GetInfoFromUser(clsBankClient& Client)
     {
 
-        cout << "Please enter First Name: ";
+        std::cout << "Please enter First Name: ";
         Client.FirstName = clsInputValidate::ReadString();
 
-        cout << "Please enter Last Name: ";
+        std::cout << "Please enter Last Name: ";
         Client.LastName = clsInputValidate::ReadString();
 
-        cout << "Please enter Phone: ";
+        std::cout << "Please enter Phone: ";
         Client.Phone = clsInputValidate::ReadString();
 
-        cout << "Please enter Email: ";
+        std::cout << "Please enter Email: ";
         Client.Email = clsInputValidate::ReadString();
 
-        cout << "Please enter Pin Code: ";
+        std::cout << "Please enter Pin Code: ";
         Client.PinCode = clsInputValidate::ReadString();
 
-        cout << "Please enter Balance: ";
+        std::cout << "Please enter Balance: ";
         Client.AccountBalance = clsInputValidate::ReadFloatNumber();
 
     }
 
     void _Update()
     {
-        vector <clsBankClient> _vClients;
+        std::vector <clsBankClient> _vClients;
         _vClients = _GetDataFromFileToVector();
 
         for (clsBankClient& Client : _vClients)
@@ -159,20 +158,20 @@ private:
     {
         _AddDataLineToFile(_ConvertObjectToLine(*this));
     }
-    void _AddDataLineToFile(string  stDataLine)
+    void _AddDataLineToFile(std::string  stDataLine)
     {
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Clients.txt", ios::out | ios::app);
 
         if (MyFile.is_open())
         {
 
-            MyFile << stDataLine << endl;
+            MyFile << stDataLine << std::endl;
 
             MyFile.close();
         }
         else
-            cout << "The File Can't Open!\n";
+            std::cout << "The File Can't Open!\n";
 
     }
    
@@ -181,26 +180,26 @@ private:
             return clsBankClient(enMode::enEmptyMode, "", "", "", "", "", "", 0);
         }
    
-    string _PrepareTransferLogRecord(float Amount, clsBankClient DestinationClient,
-        string UserName, string Seperator = "#//#")
+    std::string _PrepareTransferLogRecord(float Amount, clsBankClient DestinationClient,
+        std::string UserName, std::string Seperator = "#//#")
     {
-        string TransferLogRecord = "";
+        std::string TransferLogRecord = "";
         TransferLogRecord += clsDate::GetSystemDateTimeString() + Seperator;
         TransferLogRecord += GetAccountNumber() + Seperator;
         TransferLogRecord += DestinationClient.GetAccountNumber() + Seperator;
-        TransferLogRecord += to_string(Amount) + Seperator;
-        TransferLogRecord += to_string(AccountBalance) + Seperator;
-        TransferLogRecord += to_string(DestinationClient.AccountBalance) + Seperator;
+        TransferLogRecord += std::to_string(Amount) + Seperator;
+        TransferLogRecord += std::to_string(AccountBalance) + Seperator;
+        TransferLogRecord += std::to_string(DestinationClient.AccountBalance) + Seperator;
         TransferLogRecord += UserName;
         return TransferLogRecord;
     }
 
     struct stTrnsferLogRecord;
-    static stTrnsferLogRecord _ConvertTransferLogLineToRecord(string Line, string Seperator = "#//#")
+    static stTrnsferLogRecord _ConvertTransferLogLineToRecord(std::string Line, std::string Seperator = "#//#")
     {
         stTrnsferLogRecord TrnsferLogRecord;
 
-        vector <string> vTrnsferLogRecordLine = clsString::Split(Line, Seperator);
+        std::vector <std::string> vTrnsferLogRecordLine = clsString::Split(Line, Seperator);
         TrnsferLogRecord.DateTime = vTrnsferLogRecordLine[0];
         TrnsferLogRecord.SourceAccountNumber = vTrnsferLogRecordLine[1];
         TrnsferLogRecord.DestinationAccountNumber = vTrnsferLogRecordLine[2];
@@ -212,26 +211,26 @@ private:
         return TrnsferLogRecord;
 
     }
-    void _RegisterTransferLog(float Amount, clsBankClient DestinationClient, string UserName)
+    void _RegisterTransferLog(float Amount, clsBankClient DestinationClient, std::string UserName)
     {
 
-        string stDataLine = _PrepareTransferLogRecord(Amount, DestinationClient, UserName);
+        std::string stDataLine = _PrepareTransferLogRecord(Amount, DestinationClient, UserName);
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("TransferLog.txt", ios::out | ios::app);
 
         if (MyFile.is_open())
         {
 
-            MyFile << stDataLine << endl;
+            MyFile << stDataLine << std::endl;
 
             MyFile.close();
         }
 
     }
 public:
-    clsBankClient(enMode Mode, string FirstName, string LastName,
-        string Email, string Phone, string AccountNumber, string PinCode,
+    clsBankClient(enMode Mode, std::string FirstName, std::string LastName,
+        std::string Email, std::string Phone, std::string AccountNumber, std::string PinCode,
         float AccountBalance) :
         clsPerson(FirstName, LastName, Email, Phone)
 
@@ -245,29 +244,29 @@ public:
 
     struct stTrnsferLogRecord
     {
-        string DateTime;
-        string SourceAccountNumber;
-        string DestinationAccountNumber;
+        std::string DateTime;
+        std::string SourceAccountNumber;
+        std::string DestinationAccountNumber;
         float  Amount;
         float  srcBalanceAfter;
         float  destBalanceAfter;
-        string UserName;
+        std::string UserName;
     };
 
-    string GetAccountNumber()
+    std::string GetAccountNumber()
     {
         return _AccountNumber;
     }
 
-    void SetPinCode(string PinCode)
+    void SetPinCode(std::string PinCode)
     {
         _PinCode = PinCode;
     }
-    string GetPinCode()
+    std::string GetPinCode()
     {
         return _PinCode;
     }
-    __declspec(property(get = GetPinCode, put = SetPinCode)) string PinCode;
+    __declspec(property(get = GetPinCode, put = SetPinCode)) std::string PinCode;
 
     void SetAccountBalance(float AccountBalance)
     {
@@ -279,7 +278,7 @@ public:
     }
     __declspec(property(get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
 
-    static bool IsClientExist(string AccountNumber)
+    static bool IsClientExist(std::string AccountNumber)
     {
         clsBankClient Client1 = clsBankClient::Find(AccountNumber);
 
@@ -334,18 +333,18 @@ public:
         }
 
     }
-    static  clsBankClient GetAddNewClientObject(string AccountNumber) {
+    static  clsBankClient GetAddNewClientObject(std::string AccountNumber) {
         return clsBankClient(enMode::enAddNew, "", "", "", "", AccountNumber, "", 0);
     }
 
-  static clsBankClient Find(string AccountNumber)
+  static clsBankClient Find(std::string AccountNumber)
     {
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Clients.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
-            string Line;
+            std::string Line;
             while (getline(MyFile, Line))
             {
                 clsBankClient Client = _ConvertLinetoClientObject(Line);
@@ -361,15 +360,15 @@ public:
 
         return _GetEmptyClientObject();
     }
-  static clsBankClient Find(string AccountNumber, string PinCode)
+  static clsBankClient Find(std::string AccountNumber, std::string PinCode)
     {
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Clients.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
-            string Line;
+            std::string Line;
             while (getline(MyFile, Line))
             {
                 clsBankClient Client =  _ConvertLinetoClientObject(Line);
@@ -386,7 +385,7 @@ public:
 
   bool Delete()
   {
-      vector <clsBankClient> vFileData = _GetDataFromFileToVector();
+      std::vector <clsBankClient> vFileData = _GetDataFromFileToVector();
 
       for (clsBankClient& Client : vFileData)
       {
@@ -403,23 +402,23 @@ public:
       return true;
   }
 
-  static vector <clsBankClient> GetClientsList()
+  static std::vector <clsBankClient> GetClientsList()
   {
       return _GetDataFromFileToVector();
   }
    void Print()
   {
-      cout << "\nClient Card:";
-      cout << "\n___________________";
-      cout << "\nFirstName   : " << FirstName;
-      cout << "\nLastName    : " << LastName;
-      cout << "\nFull Name   : " << FullName();
-      cout << "\nEmail       : " << Email;
-      cout << "\nPhone       : " << Phone;
-      cout << "\nAcc. Number : " << GetAccountNumber();
-      cout << "\nPin Code    : " << GetPinCode();
-      cout << "\nBalance     : " << GetAccountBalance();
-      cout << "\n___________________\n";
+      std::cout << "\nClient Card:";
+      std::cout << "\n___________________";
+      std::cout << "\nFirstName   : " << FirstName;
+      std::cout << "\nLastName    : " << LastName;
+      std::cout << "\nFull Name   : " << FullName();
+      std::cout << "\nEmail       : " << Email;
+      std::cout << "\nPhone       : " << Phone;
+      std::cout << "\nAcc. Number : " << GetAccountNumber();
+      std::cout << "\nPin Code    : " << GetPinCode();
+      std::cout << "\nBalance     : " << GetAccountBalance();
+      std::cout << "\n___________________\n";
   }
    void Deposit(double Amount)
    {
@@ -442,7 +441,7 @@ public:
        }
 
    }
-   bool Transfer(float Amount, clsBankClient& DestinationClient, string UserName)
+   bool Transfer(float Amount, clsBankClient& DestinationClient, std::string UserName)
    {
        if (Amount > AccountBalance)
        {
@@ -455,17 +454,17 @@ public:
 
        return true;
    }
-   static  vector <stTrnsferLogRecord> GetTransfersLogList()
+   static  std::vector <stTrnsferLogRecord> GetTransfersLogList()
    {
-       vector <stTrnsferLogRecord> vTransferLogRecord;
+       std::vector <stTrnsferLogRecord> vTransferLogRecord;
 
-       fstream MyFile;
+       std::fstream MyFile;
        MyFile.open("TransferLog.txt", ios::in);//read Mode
 
        if (MyFile.is_open())
        {
 
-           string Line;
+           std::string Line;
 
            stTrnsferLogRecord TransferRecord;
 

@@ -11,24 +11,24 @@ private:
 
     static float _ReadAmount()
     {
-        cout << "\nEnter Amount to Exchange: ";
+        std::cout << "\nEnter Amount to Exchange: ";
         float Amount = 0;
 
         Amount = clsInputValidate::ReadFloatNumber();
         return Amount;
     }
 
-    static clsCurrency _GetCurrency(string Message)
+    static clsCurrency _GetCurrency(std::string Message)
     {
 
-        string CurrencyCode;
-        cout << Message << endl;
+        std::string CurrencyCode;
+        std::cout << Message << std::endl;
         
         CurrencyCode = clsInputValidate::ReadString();
 
         while (!clsCurrency::IsCurrencyExist(CurrencyCode))
         {
-            cout << "\nCurrency is not found, choose another one: ";
+            std::cout << "\nCurrency is not found, choose another one: ";
             CurrencyCode = clsInputValidate::ReadString();
         }
 
@@ -37,16 +37,16 @@ private:
     }
 
 
-    static  void _PrintCurrencyCard(clsCurrency Currency, string Title = "Currency Card:")
+    static  void _PrintCurrencyCard(clsCurrency Currency, std::string Title = "Currency Card:")
     {
 
-        cout << "\n" << Title << "\n";
-        cout << "_____________________________\n";
-        cout << "\nCountry       : " << Currency.Country();
-        cout << "\nCode          : " << Currency.CurrencyCode();
-        cout << "\nName          : " << Currency.CurrencyName();
-        cout << "\nRate(1$) =    : " << Currency.Rate();
-        cout << "\n_____________________________\n\n";
+        std::cout << "\n" << Title << "\n";
+        std::cout << "_____________________________\n";
+        std::cout << "\nCountry       : " << Currency.Country();
+        std::cout << "\nCode          : " << Currency.CurrencyCode();
+        std::cout << "\nName          : " << Currency.CurrencyName();
+        std::cout << "\nRate(1$) =    : " << Currency.Rate();
+        std::cout << "\n_____________________________\n\n";
 
     }
 
@@ -57,7 +57,7 @@ private:
 
         float AmountInUSD = Currency1.ConvertToUSD(Amount);
 
-        cout << Amount << " " << Currency1.CurrencyCode()
+        std::cout << Amount << " " << Currency1.CurrencyCode()
             << " = " << AmountInUSD << " USD\n";
 
         if (Currency2.CurrencyCode() == "USD")
@@ -65,13 +65,13 @@ private:
             return;
         }
 
-        cout << "\nConverting from USD to:\n";
+        std::cout << "\nConverting from USD to:\n";
 
         _PrintCurrencyCard(Currency2, "To:");
 
         float AmountInCurrrency2 = Currency1.ConvertToOtherCurrency(Amount, Currency2);
 
-        cout << Amount << " " << Currency1.CurrencyCode()
+        std::cout << Amount << " " << Currency1.CurrencyCode()
             << " = " << AmountInCurrrency2 << " " << Currency2.CurrencyCode();
 
     }
@@ -93,8 +93,8 @@ public:
 
             _PrintCalculationsResults(Amount, CurrencyFrom, CurrencyTo);
 
-            cout << "\n\nDo you want to perform another calculation? y/n ? ";
-            cin >> Continue;
+            std::cout << "\n\nDo you want to perform another calculation? y/n ? ";
+            std::cin >> Continue;
 
         }
 

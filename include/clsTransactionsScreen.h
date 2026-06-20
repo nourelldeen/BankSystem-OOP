@@ -10,7 +10,6 @@
 #include "clsTransfareScreen.h"
 #include "clsTransferLogScreen.h"
 
-using namespace std;
 
 
 class clsTransactionsScreen : protected clsScreen
@@ -34,7 +33,7 @@ class clsTransactionsScreen : protected clsScreen
 
     static void _GoBackToTransactionsMenue()
     {
-        cout << "\n\nPress any key to go back to Transactions Menue...";
+        std::cout << "\n\nPress any key to go back to Transactions Menue...";
         system("pause>0");
         ShowTransactionsMenue();
 
@@ -91,17 +90,17 @@ public:
         system("cls");
         _DrawScreenHeader("\tTransactions Screen");
        
-        cout << setw(37) << left << "" << "===========================================\n";
-        cout << setw(37) << left << "" << "\t\t Transactions Menu\n";
-        cout << setw(37) << left << "" << "===========================================\n";
-        cout << setw(37) << left << "" << "\t[1] Deposit.\n";
-        cout << setw(37) << left << "" << "\t[2] Withdraw.\n";
-        cout << setw(37) << left << "" << "\t[3] Total Balances.\n";
-        cout << setw(37) << left << "" << "\t[4] Transfare.\n";
-        cout << setw(37) << left << "" << "\t[5] TransfareLog.\n";
-        cout << setw(37) << left << "" << "\t[6] Main Menu.\n";
-        cout << setw(37) << left << "" << "===========================================\n";
-        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 6]: ";
+        std::cout << std::setw(37) << std::left << "" << "===========================================\n";
+        std::cout << std::setw(37) << std::left << "" << "\t\t Transactions Menu\n";
+        std::cout << std::setw(37) << std::left << "" << "===========================================\n";
+        std::cout << std::setw(37) << std::left << "" << "\t[1] Deposit.\n";
+        std::cout << std::setw(37) << std::left << "" << "\t[2] Withdraw.\n";
+        std::cout << std::setw(37) << std::left << "" << "\t[3] Total Balances.\n";
+        std::cout << std::setw(37) << std::left << "" << "\t[4] Transfare.\n";
+        std::cout << std::setw(37) << std::left << "" << "\t[5] TransfareLog.\n";
+        std::cout << std::setw(37) << std::left << "" << "\t[6] Main Menu.\n";
+        std::cout << std::setw(37) << std::left << "" << "===========================================\n";
+        std::cout << std::setw(37) << std::left << "" << "Choose what do you want to do? [1 to 6]: ";
 
         _PerformTransactionsOption((enTransactionsOptions)_ReadTransactionsMenuOption());
            

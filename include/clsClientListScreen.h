@@ -11,22 +11,22 @@ class clsClientListScreen :protected clsScreen
 private:
     static void _PrintClientListHeader()
     {
-        cout << "____________________________________________________________________________________________________________________\n\n";
-        cout << setw(20) << left << "| Account Number";
-        cout << setw(20) << left << "| Pin Code";
-        cout << setw(40) << left << "| Client Name";
-        cout << setw(20) << left << "| Phone";
-        cout << setw(20) << left << "| Balance";
-        cout << "\n____________________________________________________________________________________________________________________\n\n";
+        std::cout << "____________________________________________________________________________________________________________________\n\n";
+        std::cout << std::setw(20) << std::left << "| Account Number";
+        std::cout << std::setw(20) << std::left << "| Pin Code";
+        std::cout << std::setw(40) << std::left << "| Client Name";
+        std::cout << std::setw(20) << std::left << "| Phone";
+        std::cout << std::setw(20) << std::left << "| Balance";
+        std::cout << "\n____________________________________________________________________________________________________________________\n\n";
     }
 
     static void _PrintListInfo(clsBankClient Client)
     {
-        cout << "| " << setw(18) << Client.GetAccountNumber();
-        cout << "| " << setw(18) << Client.GetPinCode();
-        cout << "| " << setw(38) << Client.FullName();
-        cout << "| " << setw(18) << Client.GetPhone();
-        cout << "| " << setw(18) << Client.GetAccountBalance();
+        std::cout << "| " << std::setw(18) << Client.GetAccountNumber();
+        std::cout << "| " << std::setw(18) << Client.GetPinCode();
+        std::cout << "| " << std::setw(38) << Client.FullName();
+        std::cout << "| " << std::setw(18) << Client.GetPhone();
+        std::cout << "| " << std::setw(18) << Client.GetAccountBalance();
     }
 
 public:
@@ -37,24 +37,24 @@ public:
             return;// this will exit the function and it will not continue
         }
 
-        vector <clsBankClient> vClients = clsBankClient::GetClientsList();
+        std::vector <clsBankClient> vClients = clsBankClient::GetClientsList();
 
-        string Title = "\t  Client List Screen";
-        string SubTitle = "\t    (" + to_string(vClients.size()) + ") Client(s).";
+        std::string Title = "\t  Client List Screen";
+        std::string SubTitle = "\t    (" + std::to_string(vClients.size()) + ") Client(s).";
 
         system("cls");
 
         _DrawScreenHeader(Title, SubTitle);
         _PrintClientListHeader();
         if (vClients.size() == 0)
-            cout << "\t\t\t\tNo Clients Available In the System!";
+            std::cout << "\t\t\t\tNo Clients Available In the System!";
         else
 
         for (clsBankClient& Client : vClients)
         {
             _PrintListInfo(Client);
         }
-        cout << "\n____________________________________________________________________________________________________________________\n\n\n";
+        std::cout << "\n____________________________________________________________________________________________________________________\n\n\n";
 
     }
 

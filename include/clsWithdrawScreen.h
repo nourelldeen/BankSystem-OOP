@@ -8,12 +8,12 @@ class clsWithdrawScreen : public clsScreen
 private:
 	static bool _AddWithdraw(clsBankClient& Client)
 	{
-		cout << "Please Enter Withdraw Amount? ";
+		std::cout << "Please Enter Withdraw Amount? ";
 		float withdraw = clsInputValidate::ReadFloatNumber();
 
 		char sure = 'Y';
-		cout << "Are you sure you want to make this withdraw? Y/N  ";
-		cin >> sure;
+		std::cout << "Are you sure you want to make this withdraw? Y/N  ";
+		std::cin >> sure;
 
 		if (toupper(sure) != 'Y')
 		{
@@ -22,7 +22,7 @@ private:
 
 		if (!Client.Withdraw(withdraw))
 		{
-			cout << "\nWithdraw Failed: Amount Exceeds the Available Balance.\n";
+			std::cout << "\nWithdraw Failed: Amount Exceeds the Available Balance.\n";
 			return false;
 		}
 
@@ -34,13 +34,13 @@ public:
 	{
 		_DrawScreenHeader("\t   Withdraw");
 
-		string AccountNumber;
-		cout << "Please enter the AccountNumber?\n";
+		std::string AccountNumber;
+		std::cout << "Please enter the AccountNumber?\n";
 		AccountNumber = clsInputValidate::ReadString();
 
 		while (!clsBankClient::IsClientExist(AccountNumber))
 		{
-			cout << "The Client Is Not Exist! Please Choose another PinCode:";
+			std::cout << "The Client Is Not Exist! Please Choose another PinCode:";
 			AccountNumber = clsInputValidate::ReadString();
 		}
 		clsBankClient Client = clsBankClient::Find(AccountNumber);
@@ -49,7 +49,7 @@ public:
 		if (_AddWithdraw(Client))
 		{
 			Client.Print();
-			cout << "\nThe Process Done Successfully ;)\n";
+			std::cout << "\nThe Process Done Successfully ;)\n";
 		}
 	}
 

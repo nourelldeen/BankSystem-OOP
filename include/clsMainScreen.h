@@ -14,7 +14,6 @@
 #include "clsLoginRegisterScreen.h"
 #include "clsCurrencyExchangeMainScreen.h"
 
-using namespace std;
 
 class clsMainScreen :protected clsScreen
 {
@@ -29,14 +28,14 @@ private:
 
 	static short _ReadMainMenueOption()
 	{
-		cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 9]? ";
+		std::cout << std::setw(37) << std::left << "" << "Choose what do you want to do? [1 to 9]? ";
 		short Choice = clsInputValidate::ReadShortNumberBetween(1, 9, "Enter Number between 1 to 9? ");
 		return Choice;
 	}
 
 	static  void _GoBackToMainMenue()
 	{
-		cout << setw(37) << left << "" << "\n\tPress any key to go back to Main Menue...\n";
+		std::cout << std::setw(37) << std::left << "" << "\n\tPress any key to go back to Main Menue...\n";
 
 		system("pause>0");
 		ShowMainMenue();
@@ -44,7 +43,7 @@ private:
 
 	static void _ShowAllClientsScreen()
 	{
-		//  cout << "\nClient List Screen Will be here...\n";
+		//  std::cout << "\nClient List Screen Will be here...\n";
 		clsClientListScreen::ShowClientList();
 
 
@@ -52,21 +51,21 @@ private:
 
 	static void _ShowAddNewClientsScreen()
 	{
-		// cout << "\nAdd New Client Screen Will be here...\n";
+		// std::cout << "\nAdd New Client Screen Will be here...\n";
 		clsAddNewClientScreen::ShowAddNewClientScreen();
 
 	}
 
 	static void _ShowDeleteClientScreen()
 	{
-		//cout << "\nDelete Client Screen Will be here...\n";
+		//std::cout << "\nDelete Client Screen Will be here...\n";
 		clsDeleteClientScreen::ShowDeleteClientScreen();
 
 	}
 
 	static void _ShowUpdateClientScreen()
 	{
-		//cout << "\nUpdate Client Screen Will be here...\n";
+		//std::cout << "\nUpdate Client Screen Will be here...\n";
 		clsUpdateClientScreen::ShowUpdateClientScreen();
 
 
@@ -74,7 +73,7 @@ private:
 
 	static void _ShowFindClientScreen()
 	{
-		// cout << "\nFind Client Screen Will be here...\n";
+		// std::cout << "\nFind Client Screen Will be here...\n";
 		clsFindClientScreen::ShowFindClientScreen();
 
 
@@ -82,20 +81,20 @@ private:
 
 	static void _ShowTransactionsMenue()
 	{
-		// cout << "\nTransactions Menue Will be here...\n";
+		// std::cout << "\nTransactions Menue Will be here...\n";
 		clsTransactionsScreen::ShowTransactionsMenue();
 
 	}
 
 	static void _ShowManageUsersMenue()
 	{
-		// cout << "\nUsers Menue Will be here...\n";
+		// std::cout << "\nUsers Menue Will be here...\n";
 		clsManageUsersScreen::ShowManageUsersMenue();
 	}
 
 	/*  static void _ShowEndScreen()
 	  {
-		  cout << "\nEnd Screen Will be here...\n";
+		  std::cout << "\nEnd Screen Will be here...\n";
 
 	  }*/
 	static void _ShowCurrencyExchangeMainScreen()
@@ -192,19 +191,19 @@ public:
 		system("cls");
 		_DrawScreenHeader("\t\tMain Screen");
 
-		cout << setw(37) << left << "" << "===========================================\n";
-		cout << setw(37) << left << "" << "\t\t\tMain Menue\n";
-		cout << setw(37) << left << "" << "===========================================\n";
-		cout << setw(37) << left << "" << "\t[1] Show Client List.\n";
-		cout << setw(37) << left << "" << "\t[2] Add New Client.\n";
-		cout << setw(37) << left << "" << "\t[3] Delete Client.\n";
-		cout << setw(37) << left << "" << "\t[4] Update Client Info.\n";
-		cout << setw(37) << left << "" << "\t[5] Find Client.\n";
-		cout << setw(37) << left << "" << "\t[6] Transactions.\n";
-		cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
-		cout << setw(37) << left << "" << "\t[8] Register Login.\n";
-		cout << setw(37) << left << "" << "\t[9] Logout.\n";
-		cout << setw(37) << left << "" << "===========================================\n";
+		std::cout << std::setw(37) << std::left << "" << "===========================================\n";
+		std::cout << std::setw(37) << std::left << "" << "\t\t\tMain Menue\n";
+		std::cout << std::setw(37) << std::left << "" << "===========================================\n";
+		std::cout << std::setw(37) << std::left << "" << "\t[1] Show Client List.\n";
+		std::cout << std::setw(37) << std::left << "" << "\t[2] Add New Client.\n";
+		std::cout << std::setw(37) << std::left << "" << "\t[3] Delete Client.\n";
+		std::cout << std::setw(37) << std::left << "" << "\t[4] Update Client Info.\n";
+		std::cout << std::setw(37) << std::left << "" << "\t[5] Find Client.\n";
+		std::cout << std::setw(37) << std::left << "" << "\t[6] Transactions.\n";
+		std::cout << std::setw(37) << std::left << "" << "\t[7] Manage Users.\n";
+		std::cout << std::setw(37) << std::left << "" << "\t[8] Register Login.\n";
+		std::cout << std::setw(37) << std::left << "" << "\t[9] Logout.\n";
+		std::cout << std::setw(37) << std::left << "" << "===========================================\n";
 
 		_PerfromMainMenueOption((enMainMenueOptions)_ReadMainMenueOption());
 	}

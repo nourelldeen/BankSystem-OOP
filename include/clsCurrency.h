@@ -13,14 +13,14 @@ private:
     enum enMode { EmptyMode = 0, UpdateMode = 1 };
     enMode _Mode;
 
-    string _Country;
-    string _CurrencyCode;
-    string _CurrencyName;
+    std::string _Country;
+    std::string _CurrencyCode;
+    std::string _CurrencyName;
     float _Rate;
 
-    static clsCurrency _ConvertLinetoCurrencyObject(string Line, string Seperator = "#//#")
+    static clsCurrency _ConvertLinetoCurrencyObject(std::string Line, std::string Seperator = "#//#")
     {
-        vector<string> vCurrencyData;
+        std::vector<std::string> vCurrencyData;
         vCurrencyData = clsString::Split(Line, Seperator);
 
         return clsCurrency(enMode::UpdateMode, vCurrencyData[0], vCurrencyData[1], vCurrencyData[2],
@@ -28,31 +28,31 @@ private:
 
     }
 
-    static string _ConverCurrencyObjectToLine(clsCurrency Currency, string Seperator = "#//#")
+    static std::string _ConverCurrencyObjectToLine(clsCurrency Currency, std::string Seperator = "#//#")
     {
 
-        string stCurrencyRecord = "";
+        std::string stCurrencyRecord = "";
         stCurrencyRecord += Currency.Country() + Seperator;
         stCurrencyRecord += Currency.CurrencyCode() + Seperator;
         stCurrencyRecord += Currency.CurrencyName() + Seperator;
-        stCurrencyRecord += to_string(Currency.Rate());
+        stCurrencyRecord += std::to_string(Currency.Rate());
 
         return stCurrencyRecord;
 
     }
 
-    static  vector <clsCurrency> _LoadCurrencysDataFromFile()
+    static  std::vector <clsCurrency> _LoadCurrencysDataFromFile()
     {
 
-        vector <clsCurrency> vCurrencys;
+        std::vector <clsCurrency> vCurrencys;
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Currencies.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
 
-            string Line;
+            std::string Line;
 
             while (getline(MyFile, Line))
             {
@@ -70,13 +70,13 @@ private:
 
     }
 
-    static void _SaveCurrencyDataToFile(vector <clsCurrency> vCurrencys)
+    static void _SaveCurrencyDataToFile(std::vector <clsCurrency> vCurrencys)
     {
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Currencies.txt", ios::out);//overwrite
 
-        string DataLine;
+        std::string DataLine;
 
         if (MyFile.is_open())
         {
@@ -84,7 +84,7 @@ private:
             for (clsCurrency C : vCurrencys)
             {
                 DataLine = _ConverCurrencyObjectToLine(C);
-                MyFile << DataLine << endl;
+                MyFile << DataLine << std::endl;
 
 
 
@@ -98,7 +98,7 @@ private:
 
     void _Update()
     {
-        vector <clsCurrency> _vCurrencys;
+        std::vector <clsCurrency> _vCurrencys;
         _vCurrencys = _LoadCurrencysDataFromFile();
 
         for (clsCurrency& C : _vCurrencys)
@@ -122,7 +122,7 @@ private:
 
 public:
 
-    clsCurrency(enMode Mode, string Country, string CurrencyCode, string CurrencyName, float Rate)
+    clsCurrency(enMode Mode, std::string Country, std::string CurrencyCode, std::string CurrencyName, float Rate)
     {
         _Mode = Mode;
         _Country = Country;
@@ -131,7 +131,7 @@ public:
         _Rate = Rate;
     }
 
-    static vector <clsCurrency> GetAllUSDRates()
+    static std::vector <clsCurrency> GetAllUSDRates()
     {
 
         return _LoadCurrencysDataFromFile();
@@ -143,17 +143,17 @@ public:
         return (_Mode == enMode::EmptyMode);
     }
 
-    string Country()
+    std::string Country()
     {
         return _Country;
     }
 
-    string CurrencyCode()
+    std::string CurrencyCode()
     {
         return _CurrencyCode;
     }
 
-    string CurrencyName()
+    std::string CurrencyName()
     {
         return _CurrencyName;
     }
@@ -170,17 +170,17 @@ public:
     }
 
 
-    static   clsCurrency FindByCode(string CurrencyCode)
+    static   clsCurrency FindByCode(std::string CurrencyCode)
     {
 
         CurrencyCode = clsString::UpperAllString(CurrencyCode);
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Currencies.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
-            string Line;
+            std::string Line;
             while (getline(MyFile, Line))
             {
                 clsCurrency Currency = _ConvertLinetoCurrencyObject(Line);
@@ -199,16 +199,16 @@ public:
 
     }
 
-    static   clsCurrency FindByCountry(string Country)
+    static   clsCurrency FindByCountry(std::string Country)
     {
         Country = clsString::UpperAllString(Country);
 
-        fstream MyFile;
+        std::fstream MyFile;
         MyFile.open("Currencies.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
-            string Line;
+            std::string Line;
             while (getline(MyFile, Line))
             {
                 clsCurrency Currency = _ConvertLinetoCurrencyObject(Line);
@@ -231,14 +231,14 @@ public:
     {
         return Amount / Rate();
     }
-    static bool IsCurrencyExist(string CurrencyCode)
+    static bool IsCurrencyExist(std::string CurrencyCode)
     {
         clsCurrency C1 = clsCurrency::FindByCode(CurrencyCode);
         return (!C1.IsEmpty());
 
     }
 
-    static vector <clsCurrency> GetCurrenciesList()
+    static std::vector <clsCurrency> GetCurrenciesList()
     {
         return _LoadCurrencysDataFromFile();
     }

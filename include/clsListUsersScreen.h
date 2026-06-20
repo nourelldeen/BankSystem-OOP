@@ -12,12 +12,12 @@ private:
     static void _PrintUserRecordLine(clsUser User)
     {
 
-        cout << setw(8) << left << "" << "| " << setw(12) << left << User.UserName;
-        cout << "| " << setw(25) << left << User.FullName();
-        cout << "| " << setw(12) << left << User.Phone;
-        cout << "| " << setw(20) << left << User.Email;
-        cout << "| " << setw(10) << left << User.Password;
-        cout << "| " << setw(12) << left << User.Permissions;
+        std::cout << std::setw(8) << std::left << "" << "| " << std::setw(12) << std::left << User.UserName;
+        std::cout << "| " << std::setw(25) << std::left << User.FullName();
+        std::cout << "| " << std::setw(12) << std::left << User.Phone;
+        std::cout << "| " << std::setw(20) << std::left << User.Email;
+        std::cout << "| " << std::setw(10) << std::left << User.Password;
+        std::cout << "| " << std::setw(12) << std::left << User.Permissions;
 
     }
 
@@ -25,38 +25,38 @@ public:
 
     static void ShowUsersList()
     {
-        vector <clsUser> vUsers = clsUser::GetUsersList();
+        std::vector <clsUser> vUsers = clsUser::GetUsersList();
 
-        string Title = "\t  User List Screen";
-        string SubTitle = "\t    (" + to_string(vUsers.size()) + ") User(s).";
+        std::string Title = "\t  User List Screen";
+        std::string SubTitle = "\t    (" + std::to_string(vUsers.size()) + ") User(s).";
 
         _DrawScreenHeader(Title, SubTitle);
 
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "______________________________________________\n" << endl;
+        std::cout << std::setw(8) << std::left << "" << "\n\t_______________________________________________________";
+        std::cout << "______________________________________________\n" << std::endl;
 
-        cout << setw(8) << left << "" << "| " << left << setw(12) << "UserName";
-        cout << "| " << left << setw(25) << "Full Name";
-        cout << "| " << left << setw(12) << "Phone";
-        cout << "| " << left << setw(20) << "Email";
-        cout << "| " << left << setw(10) << "Password";
-        cout << "| " << left << setw(12) << "Permissions";
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "______________________________________________\n" << endl;
+        std::cout << std::setw(8) << std::left << "" << "| " << std::left << std::setw(12) << "UserName";
+        std::cout << "| " << std::left << std::setw(25) << "Full Name";
+        std::cout << "| " << std::left << std::setw(12) << "Phone";
+        std::cout << "| " << std::left << std::setw(20) << "Email";
+        std::cout << "| " << std::left << std::setw(10) << "Password";
+        std::cout << "| " << std::left << std::setw(12) << "Permissions";
+        std::cout << std::setw(8) << std::left << "" << "\n\t_______________________________________________________";
+        std::cout << "______________________________________________\n" << std::endl;
 
         if (vUsers.size() == 0)
-            cout << "\t\t\t\tNo Users Available In the System!";
+            std::cout << "\t\t\t\tNo Users Available In the System!";
         else
 
             for (clsUser User : vUsers)
             {
 
                 _PrintUserRecordLine(User);
-                cout << endl;
+                std::cout << std::endl;
             }
 
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "______________________________________________\n" << endl;
+        std::cout << std::setw(8) << std::left << "" << "\n\t_______________________________________________________";
+        std::cout << "______________________________________________\n" << std::endl;
     }
 
 };

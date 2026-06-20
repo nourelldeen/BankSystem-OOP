@@ -1,21 +1,20 @@
 #pragma once
 #include <iostream>
 #include <string>
-using namespace std;
 
 class clsPerson
 {
 
 private:
 
-    string _FirstName;
-    string _LastName;
-    string _Email;
-    string _Phone;
+    std::string _FirstName;
+    std::string _LastName;
+    std::string _Email;
+    std::string _Phone;
 
 public:
 
-    clsPerson(string FirstName, string LastName, string Email, string Phone)
+    clsPerson(std::string FirstName, std::string LastName, std::string Email, std::string Phone)
     {
 
         _FirstName = FirstName;
@@ -25,72 +24,72 @@ public:
     }
 
     //Property Set
-    void SetFirstName(string FirstName)
+    void SetFirstName(std::string FirstName)
     {
         _FirstName = FirstName;
     }
 
     //Property Get
-    string GetFirstName()
+    std::string GetFirstName()
     {
         return _FirstName;
     }
-    __declspec(property(get = GetFirstName, put = SetFirstName)) string FirstName;
+    __declspec(property(get = GetFirstName, put = SetFirstName)) std::string FirstName;
 
     //Property Set
-    void SetLastName(string LastName)
+    void SetLastName(std::string LastName)
     {
         _LastName = LastName;
     }
 
     //Property Get
-    string GetLastName()
+    std::string GetLastName()
     {
         return _LastName;
     }
-    __declspec(property(get = GetLastName, put = SetLastName)) string LastName;
+    __declspec(property(get = GetLastName, put = SetLastName)) std::string LastName;
 
     //Property Set
-    void SetEmail(string Email)
+    void SetEmail(std::string Email)
     {
         _Email = Email;
     }
 
     //Property Get
-    string GetEmail()
+    std::string GetEmail()
     {
         return _Email;
     }
-    __declspec(property(get = GetEmail, put = SetEmail)) string Email;
+    __declspec(property(get = GetEmail, put = SetEmail)) std::string Email;
 
     //Property Set
-    void SetPhone(string Phone)
+    void SetPhone(std::string Phone)
     {
         _Phone = Phone;
     }
 
     //Property Get
-    string GetPhone()
+    std::string GetPhone()
     {
         return _Phone;
     }
-    __declspec(property(get = GetPhone, put = SetPhone)) string Phone;
+    __declspec(property(get = GetPhone, put = SetPhone)) std::string Phone;
 
-    string FullName()
+    std::string FullName()
     {
         return _FirstName + " " + _LastName;
     }
 
     void Print()
     {
-        cout << "\nInfo:";
-        cout << "\n___________________";
-        cout << "\nFirstName: " << _FirstName;
-        cout << "\nLastName : " << _LastName;
-        cout << "\nFull Name: " << FullName();
-        cout << "\nEmail    : " << _Email;
-        cout << "\nPhone    : " << _Phone;
-        cout << "\n___________________\n";
+        std::cout << "\nInfo:";
+        std::cout << "\n___________________";
+        std::cout << "\nFirstName: " << _FirstName;
+        std::cout << "\nLastName : " << _LastName;
+        std::cout << "\nFull Name: " << FullName();
+        std::cout << "\nEmail    : " << _Email;
+        std::cout << "\nPhone    : " << _Phone;
+        std::cout << "\n___________________\n";
 
     }
 

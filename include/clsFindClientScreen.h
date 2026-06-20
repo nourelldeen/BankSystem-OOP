@@ -14,13 +14,13 @@ class clsFindClientScreen : protected clsScreen
 
           _DrawScreenHeader("Find Client");
 
-          string AccountNumber;
-          cout << "Please enter the AccountNumber?\n";
+          std::string AccountNumber;
+          std::cout << "Please enter the AccountNumber?\n";
           AccountNumber = clsInputValidate::ReadString();
 
           while (!clsBankClient::IsClientExist(AccountNumber))
           {
-              cout << "The Client Is Already Exist! Please Choose another PinCode:";
+              std::cout << "The Client Is Already Exist! Please Choose another PinCode:";
               AccountNumber = clsInputValidate::ReadString();
           }
 
@@ -30,11 +30,11 @@ class clsFindClientScreen : protected clsScreen
 
           if (!Client.IsEmpty())
           {
-              cout << "\nClient Found :)\n";
+              std::cout << "\nClient Found :)\n";
           }
           else
           {
-              cout << "\nClient Was Not Found :(\n";
+              std::cout << "\nClient Was Not Found :(\n";
           }
 
           Client.Print();

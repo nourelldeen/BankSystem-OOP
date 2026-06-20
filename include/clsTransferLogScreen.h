@@ -15,13 +15,13 @@ private:
     static void PrintTransferLogRecordLine(clsBankClient::stTrnsferLogRecord TransferLogRecord)
     {
 
-        cout << setw(8) << left << "" << "| " << setw(23) << left << TransferLogRecord.DateTime;
-        cout << "| " << setw(8) << left << TransferLogRecord.SourceAccountNumber;
-        cout << "| " << setw(8) << left << TransferLogRecord.DestinationAccountNumber;
-        cout << "| " << setw(8) << left << TransferLogRecord.Amount;
-        cout << "| " << setw(10) << left << TransferLogRecord.srcBalanceAfter;
-        cout << "| " << setw(10) << left << TransferLogRecord.destBalanceAfter;
-        cout << "| " << setw(8) << left << TransferLogRecord.UserName;
+        std::cout << std::setw(8) << std::left << "" << "| " << std::setw(23) << std::left << TransferLogRecord.DateTime;
+        std::cout << "| " << std::setw(8) << std::left << TransferLogRecord.SourceAccountNumber;
+        std::cout << "| " << std::setw(8) << std::left << TransferLogRecord.DestinationAccountNumber;
+        std::cout << "| " << std::setw(8) << std::left << TransferLogRecord.Amount;
+        std::cout << "| " << std::setw(10) << std::left << TransferLogRecord.srcBalanceAfter;
+        std::cout << "| " << std::setw(10) << std::left << TransferLogRecord.destBalanceAfter;
+        std::cout << "| " << std::setw(8) << std::left << TransferLogRecord.UserName;
 
 
     }
@@ -32,40 +32,40 @@ public:
     {
 
 
-        vector <clsBankClient::stTrnsferLogRecord> vTransferLogRecord = clsBankClient::GetTransfersLogList();
+        std::vector <clsBankClient::stTrnsferLogRecord> vTransferLogRecord = clsBankClient::GetTransfersLogList();
 
-        string Title = "\tTransfer Log List Screen";
-        string SubTitle = "\t    (" + to_string(vTransferLogRecord.size()) + ") Record(s).";
+        std::string Title = "\tTransfer Log List Screen";
+        std::string SubTitle = "\t    (" + std::to_string(vTransferLogRecord.size()) + ") Record(s).";
 
         _DrawScreenHeader(Title, SubTitle);
 
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "_________________________________________\n" << endl;
+        std::cout << std::setw(8) << std::left << "" << "\n\t_______________________________________________________";
+        std::cout << "_________________________________________\n" << std::endl;
 
-        cout << setw(8) << left << "" << "| " << left << setw(23) << "Date/Time";
-        cout << "| " << left << setw(8) << "s.Acct";
-        cout << "| " << left << setw(8) << "d.Acct";
-        cout << "| " << left << setw(8) << "Amount";
-        cout << "| " << left << setw(10) << "s.Balance";
-        cout << "| " << left << setw(10) << "d.Balance";
-        cout << "| " << left << setw(8) << "User";
+        std::cout << std::setw(8) << std::left << "" << "| " << std::left << std::setw(23) << "Date/Time";
+        std::cout << "| " << std::left << std::setw(8) << "s.Acct";
+        std::cout << "| " << std::left << std::setw(8) << "d.Acct";
+        std::cout << "| " << std::left << std::setw(8) << "Amount";
+        std::cout << "| " << std::left << std::setw(10) << "s.Balance";
+        std::cout << "| " << std::left << std::setw(10) << "d.Balance";
+        std::cout << "| " << std::left << std::setw(8) << "User";
 
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "_________________________________________\n" << endl;
+        std::cout << std::setw(8) << std::left << "" << "\n\t_______________________________________________________";
+        std::cout << "_________________________________________\n" << std::endl;
 
         if (vTransferLogRecord.size() == 0)
-            cout << "\t\t\t\tNo Transfers Available In the System!";
+            std::cout << "\t\t\t\tNo Transfers Available In the System!";
         else
 
             for (clsBankClient::stTrnsferLogRecord Record : vTransferLogRecord)
             {
 
                 PrintTransferLogRecordLine(Record);
-                cout << endl;
+                std::cout << std::endl;
             }
 
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "_________________________________________\n" << endl;
+        std::cout << std::setw(8) << std::left << "" << "\n\t_______________________________________________________";
+        std::cout << "_________________________________________\n" << std::endl;
 
     }
 
