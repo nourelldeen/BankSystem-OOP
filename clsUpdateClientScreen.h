@@ -5,20 +5,7 @@
 class clsUpdateClientScreen : public clsScreen
 {
 private :
-    static void _PrintClient(clsBankClient& client)
-    {
-        cout << "\nClient Card:";
-        cout << "\n___________________";
-        cout << "\nFirstName   : " << client.FirstName;
-        cout << "\nLastName    : " << client.LastName;
-        cout << "\nFull Name   : " << client.FullName();
-        cout << "\nEmail       : " << client.Email;
-        cout << "\nPhone       : " << client.Phone;
-        cout << "\nAcc. Number : " << client.GetAccountNumber();
-        cout << "\nPin Code    : " << client.GetPinCode();
-        cout << "\nBalance     : " << client.GetAccountBalance();
-        cout << "\n___________________\n";
-    }
+    
     static void ReadClientInfo(clsBankClient& Client)
     {
         cout << "\nEnter FirstName: ";
@@ -64,7 +51,7 @@ public:
 
         clsBankClient Client = clsBankClient::Find(AccountNumber);
 
-        _PrintClient(Client);
+        Client.Print();
 
         cout << "\nAre you sure you want to update this client y/n? ";
 
@@ -90,7 +77,7 @@ public:
             {
                 cout << "\nAccount Updated Successfully :-)\n";
 
-                _PrintClient(Client);
+                Client.Print();
                 break;
             }
             case clsBankClient::enSaveResults::svFaildEmptyObject:

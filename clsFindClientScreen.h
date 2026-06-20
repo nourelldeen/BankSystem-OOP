@@ -4,22 +4,6 @@
 #include "clsScreen.h"
 class clsFindClientScreen : protected clsScreen
 {
-private:
-    static void _PrintClient(clsBankClient Client)
-    {
-        cout << "\nClient Card:";
-        cout << "\n___________________";
-        cout << "\nFirstName   : " << Client.FirstName;
-        cout << "\nLastName    : " << Client.LastName;
-        cout << "\nFull Name   : " << Client.FullName();
-        cout << "\nEmail       : " << Client.Email;
-        cout << "\nPhone       : " << Client.Phone;
-        cout << "\nAcc. Number : " << Client.GetAccountNumber();
-        cout << "\nPin Code    : " << Client.GetPinCode();
-        cout << "\nBalance     : " << Client.GetAccountBalance();
-        cout << "\n___________________\n";
-    }
-
   public:
       static void ShowFindClientScreen()
       {
@@ -53,7 +37,7 @@ private:
               cout << "\nClient Was Not Found :(\n";
           }
 
-          _PrintClient(Client);
+          Client.Print();
       }
 };
 

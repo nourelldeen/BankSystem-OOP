@@ -25,22 +25,6 @@ private:
 		return true;
 	}
 
-	static void _Print(clsBankClient& client)
-	{
-		cout << "\nClient Card:";
-		cout << "\n___________________";
-		cout << "\nFirstName   : " << client.FirstName;
-		cout << "\nLastName    : " << client.LastName;
-		cout << "\nFull Name   : " << client.FullName();
-		cout << "\nEmail       : " << client.Email;
-		cout << "\nPhone       : " << client.Phone;
-		cout << "\nAcc. Number : " << client.GetAccountNumber();
-		cout << "\nPin Code    : " << client.GetPinCode();
-		cout << "\nBalance     : " << client.GetAccountBalance();
-		cout << "\n___________________\n";
-
-	}
-
 public:
 	static void ShowDepositScreen()
 	{
@@ -56,11 +40,11 @@ public:
 			AccountNumber = clsInputValidate::ReadString();
 		}
 		clsBankClient Client = clsBankClient::Find(AccountNumber);
-		_Print(Client);
+		Client.Print();
 
 		if (_AddDeposit(Client))
 		{
-			_Print(Client);
+			Client.Print();
 			cout << "\nThe Process Done Successfully ;)\n";
 		}
 		else
