@@ -47,7 +47,7 @@ private:
         std::vector <clsCurrency> vCurrencys;
 
         std::fstream MyFile;
-        MyFile.open("Currencies.txt", ios::in);//read Mode
+        MyFile.open("data/Currencies.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -74,7 +74,7 @@ private:
     {
 
         std::fstream MyFile;
-        MyFile.open("Currencies.txt", ios::out);//overwrite
+        MyFile.open("data/Currencies.txt", ios::out);//overwrite
 
         std::string DataLine;
 
@@ -176,7 +176,7 @@ public:
         CurrencyCode = clsString::UpperAllString(CurrencyCode);
 
         std::fstream MyFile;
-        MyFile.open("Currencies.txt", ios::in);//read Mode
+        MyFile.open("data/Currencies.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -204,7 +204,7 @@ public:
         Country = clsString::UpperAllString(Country);
 
         std::fstream MyFile;
-        MyFile.open("Currencies.txt", ios::in);//read Mode
+        MyFile.open("data/Currencies.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {

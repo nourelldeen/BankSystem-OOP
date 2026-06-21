@@ -77,7 +77,7 @@ private:
         std::vector <clsUser> vUsers;
 
         std::fstream MyFile;
-        MyFile.open("Users.txt", ios::in);//read Mode
+        MyFile.open("data/Users.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -105,7 +105,7 @@ private:
     {
 
         std::fstream MyFile;
-        MyFile.open("Users.txt", ios::out);//overwrite
+        MyFile.open("data/Users.txt", ios::out);//overwrite
 
         std::string DataLine;
 
@@ -158,7 +158,7 @@ private:
     void _AddDataLineToFile(std::string  stDataLine)
     {
         std::fstream MyFile;
-        MyFile.open("Users.txt", ios::out | ios::app);
+        MyFile.open("data/Users.txt", ios::out | ios::app);
 
         if (MyFile.is_open())
         {
@@ -250,7 +250,7 @@ public:
     static clsUser Find(std::string UserName)
     {
         std::fstream MyFile;
-        MyFile.open("Users.txt", ios::in);//read Mode
+        MyFile.open("data/Users.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -276,7 +276,7 @@ public:
     {
 
         std::fstream MyFile;
-        MyFile.open("Users.txt", ios::in);//read Mode
+        MyFile.open("data/Users.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -400,7 +400,7 @@ public:
         std::string stDataLine = _PrepareLoginRecord();
 
         std::fstream MyFile;
-        MyFile.open("LoginRegister.txt", ios::out | ios::app);
+        MyFile.open("data/LoginRegister.txt", ios::out | ios::app);
 
         if (MyFile.is_open())
         {
@@ -417,7 +417,7 @@ public:
         std::vector <stLoginRegisterRecord> vLoginRegisterRecord;
 
         std::fstream MyFile;
-        MyFile.open("LoginRegister.txt", ios::in);//read Mode
+        MyFile.open("data/LoginRegister.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {

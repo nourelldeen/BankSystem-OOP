@@ -76,7 +76,7 @@ private:
         std::vector <clsBankClient> vFileData;
 
         std::fstream MyFile;
-        MyFile.open("Clients.txt", ios::in);//read Mode
+        MyFile.open("data/Clients.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -97,7 +97,7 @@ private:
     static void _UploadDataToFile(std::vector <clsBankClient>& vFileData)
     {
         std::fstream MyFile;
-        MyFile.open("Clients.txt", ios::out);
+        MyFile.open("data/Clients.txt", ios::out);
 
         if (MyFile.is_open())
         {
@@ -161,7 +161,7 @@ private:
     void _AddDataLineToFile(std::string  stDataLine)
     {
         std::fstream MyFile;
-        MyFile.open("Clients.txt", ios::out | ios::app);
+        MyFile.open("data/Clients.txt", ios::out | ios::app);
 
         if (MyFile.is_open())
         {
@@ -217,7 +217,7 @@ private:
         std::string stDataLine = _PrepareTransferLogRecord(Amount, DestinationClient, UserName);
 
         std::fstream MyFile;
-        MyFile.open("TransferLog.txt", ios::out | ios::app);
+        MyFile.open("data/TransferLog.txt", ios::out | ios::app);
 
         if (MyFile.is_open())
         {
@@ -340,7 +340,7 @@ public:
   static clsBankClient Find(std::string AccountNumber)
     {
         std::fstream MyFile;
-        MyFile.open("Clients.txt", ios::in);//read Mode
+        MyFile.open("data/Clients.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -364,7 +364,7 @@ public:
     {
 
         std::fstream MyFile;
-        MyFile.open("Clients.txt", ios::in);//read Mode
+        MyFile.open("data/Clients.txt", ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -459,7 +459,7 @@ public:
        std::vector <stTrnsferLogRecord> vTransferLogRecord;
 
        std::fstream MyFile;
-       MyFile.open("TransferLog.txt", ios::in);//read Mode
+       MyFile.open("data/TransferLog.txt", ios::in);//read Mode
 
        if (MyFile.is_open())
        {
