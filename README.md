@@ -179,5 +179,3 @@ This project was originally developed by me. AI tools were used to assist with d
 - **Clean Architecture**: Separation of concerns with screen/controller pattern
 - **Modern C++**: const correctness, pass-by-reference, STL usage
 ```
-
----
