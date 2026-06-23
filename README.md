@@ -181,11 +181,3 @@ This project was originally developed by me. AI tools were used to assist with d
 ```
 
 ---
-
-## What to Do
-
-1. **Copy the content above** (everything inside the code block)
-
-2. **Open README.md:**
-```bash
-notepad README.md
