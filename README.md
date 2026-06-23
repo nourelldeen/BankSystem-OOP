@@ -178,4 +178,3 @@ This project was originally developed by me. AI tools were used to assist with d
 - **Transaction Processing**: Financial operations with validation
 - **Clean Architecture**: Separation of concerns with screen/controller pattern
 - **Modern C++**: const correctness, pass-by-reference, STL usage
-```
